@@ -1,3 +1,5 @@
+// src/context/AuthContext.jsx
+
 import React, { createContext, useState, useEffect } from 'react';
 import api from '../utils/api';
 
@@ -11,20 +13,71 @@ export const AuthProvider = ({ children }) => {
     user: null
   });
 
-  const loadUser = async () => {
-    // ... a função loadUser continua igual
+  // Esta função corre UMA VEZ no arranque da app
+  useEffect(() => {
+    const loadUserOnMount = async () => {
+      const token = localStorage.getItem('token');
+      if (token) {
+        try {
+          const res = await api.get('/auth');
+          setAuthState({
+            token,
+            isAuthenticated: true,
+            isLoading: false,
+            user: res.data
+          });
+        } catch (err) {
+          localStorage.removeItem('token');
+          setAuthState({
+            token: null,
+            isAuthenticated: false,
+            isLoading: false,
+            user: null
+          });
+        }
+      } else {
+        setAuthState({
+          token: null,
+          isAuthenticated: false,
+          isLoading: false,
+          user: null
+        });
+      }
+    };
+    loadUserOnMount();
+  }, []);
+
+  // Função LOGIN completa e autónoma
+  const login = async (email, password) => {
     try {
-      const res = await api.get('/auth');
-      setAuthState({ ...authState, isAuthenticated: true, isLoading: false, user: res.data });
+      // 1. Fazer o pedido de login para obter o token
+      const res = await api.post('/users/login', { email, password });
+      const token = res.data.token;
+      localStorage.setItem('token', token);
+
+      // 2. Com o novo token, ir buscar os dados do utilizador
+      const userRes = await api.get('/auth'); // O interceptor vai usar o novo token
+
+      // 3. Atualizar o estado com TODA a informação de uma só vez
+      setAuthState({
+        token,
+        isAuthenticated: true,
+        isLoading: false,
+        user: userRes.data
+      });
     } catch (err) {
+      console.error("Falha no processo de login:", err);
       localStorage.removeItem('token');
-      setAuthState({ token: null, isAuthenticated: false, isLoading: false, user: null });
+      setAuthState({
+        token: null,
+        isAuthenticated: false,
+        isLoading: false,
+        user: null
+      });
     }
   };
 
-  useEffect(() => { loadUser(); }, []);
-
-  // FUNÇÃO DE LOGOUT
+  // Função LOGOUT
   const logout = () => {
     localStorage.removeItem('token');
     setAuthState({
@@ -36,8 +89,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    // Expor a função de logout para que os componentes a possam usar
-    <AuthContext.Provider value={{ authState, logout }}>
+    <AuthContext.Provider value={{ authState, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

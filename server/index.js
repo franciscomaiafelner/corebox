@@ -29,12 +29,10 @@ app.get('/', (req, res) => {
   res.send('API do CoreBox está a funcionar!');
 });
 
-// Definir e usar as rotas de utilizador
-// Tudo o que for para /api/users será tratado no nosso ficheiro de rotas
-app.use('/api/users', require('./routes/users'));
-// Definir e usar as rotas de autenticação
-// Tudo o que for para /api/auth será tratado no nosso ficheiro de rotas
-app.use('/api/auth', require('./routes/auth')); 
+app.use('/api/users', require('./routes/users')); // Rota para utilizadores (registo, etc.)
+app.use('/api/auth', require('./routes/auth')); // Rota de autenticação
+app.use('/api/products', require('./routes/products')); // Rota para produtos (caixas de subscrição)
+
 
 app.listen(PORT, () => {
   console.log(`Servidor a correr na porta ${PORT}`);

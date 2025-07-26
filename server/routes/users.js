@@ -48,7 +48,8 @@ router.post('/login', async (req, res) => {
     // 3. Se as credenciais estiverem corretas, criar e retornar o JWT
     const payload = {
       user: {
-        id: user.id // Guardamos o ID do utilizador no token
+        id: user.id,
+        role: user.role // A LINHA QUE FALTAVA
       }
     };
 

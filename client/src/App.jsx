@@ -1,41 +1,20 @@
-import React, { Fragment, useContext } from 'react';
-import { AuthContext } from './context/AuthContext';
-import Register from './components/Register';
-import Login from './components/Login';
-import './App.css';
+// src/App.jsx
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Register from './pages/Register';
+import Login from './pages/Login';
+import Dashboard from './pages/Dashboard';
+import PrivateRoute from './components/PrivateRoute'; // 1. Importar
+import HomePage from './pages/HomePage';
 
 function App() {
-  const { authState, logout } = useContext(AuthContext);
-  const { isAuthenticated, isLoading, user } = authState;
-
-  if (isLoading) {
-    return <h1>A carregar...</h1>;
-  }
-
-  // Links para utilizadores autenticados
-  const authLinks = (
-    <Fragment>
-      <h2>Olá, {user && user.name}!</h2>
-      <button onClick={logout}>Logout</button>
-    </Fragment>
-  );
-
-  // Links para convidados (não autenticados)
-  const guestLinks = (
-    <Fragment>
-      <h2>Registo</h2>
-      <Register />
-      <hr />
-      <h2>Login</h2>
-      <Login />
-    </Fragment>
-  );
-
   return (
-    <div>
-      <h1>Bem-vindo ao CoreBox</h1>
-      {isAuthenticated ? authLinks : guestLinks}
-    </div>
+    <Routes>
+      <Route path="/" element={<HomePage />} /> // Rota principal
+      <Route path="/register" element={<Register />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/dashboard" element={ <PrivateRoute role="seller"><Dashboard /></PrivateRoute> } />
+    </Routes>
   );
 }
 
