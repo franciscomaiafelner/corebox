@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
 app.use('/api/users', require('./routes/users')); // Rota para utilizadores (registo, etc.)
 app.use('/api/auth', require('./routes/auth')); // Rota de autenticação
 app.use('/api/products', require('./routes/products')); // Rota para produtos (caixas de subscrição)
-
+app.use('/api/payments', require('./routes/payments')); // Rota para pagamentos (Stripe)
 
 app.listen(PORT, () => {
   console.log(`Servidor a correr na porta ${PORT}`);

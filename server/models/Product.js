@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+// server/models/Product.js
 const ProductSchema = new Schema({
   name: {
     type: String,
@@ -18,11 +19,14 @@ const ProductSchema = new Schema({
     type: String,
     required: true
   },
-  // A LIGAÇÃO CRÍTICA:
-  // Cada produto pertence a um utilizador (o vendedor).
+  // O NOVO CAMPO
+  stripePriceId: {
+    type: String,
+    required: true
+  },
   seller: {
-    type: Schema.Types.ObjectId, // Armazena o ID de um utilizador
-    ref: 'User' // A referência diz ao Mongoose para procurar na coleção 'User'
+    type: Schema.Types.ObjectId,
+    ref: 'User'
   },
   createdAt: {
     type: Date,
