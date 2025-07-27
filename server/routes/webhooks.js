@@ -13,50 +13,64 @@ router.post('/stripe', express.raw({type: 'application/json'}), async (req, res)
     let event;
 
     try {
-        // 1. VERIFICAÇÃO: Usamos o segredo para garantir que o pedido veio do Stripe.
-        // Se não vier, isto vai dar um erro e o bloco catch trata disso.
         event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
     } catch (err) {
         console.log(`❌ Webhook signature verification failed.`, err.message);
         return res.status(400).send(`Webhook Error: ${err.message}`);
     }
 
-    // 2. AÇÃO: Se a verificação passou, vemos que tipo de evento recebemos.
-    if (event.type === 'checkout.session.completed') {
-        const session = event.data.object;
+    // Usar um switch para lidar com diferentes tipos de eventos
+    switch (event.type) {
+        case 'checkout.session.completed': {
+            const session = event.data.object;
+            const { userId, productId } = session.metadata;
 
-        // 3. LIGAÇÃO: Recuperamos os nossos IDs que passámos na metadata!
-        const { userId, productId } = session.metadata;
+            if (!userId || !productId) {
+                console.log('❌ Metadata em falta no checkout.session.completed');
+                return res.status(400).send('Webhook Error: Faltam IDs na metadata.');
+            }
 
-        // Se não tivermos os IDs, não podemos criar a subscrição na nossa BD.
-        if (!userId || !productId) {
-            return res.status(400).send('Webhook Error: Faltam os IDs de utilizador ou produto na metadata.');
-        }
-
-        try {
-            // 4. CRIAÇÃO: Criamos a nova subscrição na nossa base de dados.
             const newSubscription = new Subscription({
                 user: userId,
                 product: productId,
-                stripeSubscriptionId: session.subscription, // ID da subscrição gerada
-                status: 'active', // A subscrição começa logo ativa
-                // O objeto da subscrição tem o campo 'current_period_end' em formato Unix timestamp (segundos)
-                // Nós convertemos para uma data JavaScript (milissegundos)
-                currentPeriodEnd: new Date(session.created * 1000 + 30 * 24 * 60 * 60 * 1000)
+                stripeSubscriptionId: session.subscription,
+                status: 'active',
+                currentPeriodEnd: new Date(session.created * 1000 + 30 * 24 * 60 * 60 * 1000) // Simplificado, idealmente viria do objeto de subscrição
             });
 
             await newSubscription.save();
-            console.log(`✅ Subscrição para o utilizador ${userId} guardada na BD!`);
-
-        } catch (err) {
-            console.error('Erro ao guardar a subscrição na base de dados:', err);
-            return res.status(500).send('Erro interno do servidor.');
+            console.log(`✅ Nova subscrição para o utilizador ${userId} guardada!`);
+            break;
         }
+
+        case 'customer.subscription.updated': {
+            const subscription = event.data.object;
+            const newStatus = subscription.status;
+            const newPeriodEnd = new Date(subscription.current_period_end * 1000);
+
+            await Subscription.findOneAndUpdate(
+                { stripeSubscriptionId: subscription.id },
+                { status: newStatus, currentPeriodEnd: newPeriodEnd }
+            );
+            console.log(`✅ Subscrição ${subscription.id} atualizada para o estado: ${newStatus}`);
+            break;
+        }
+      
+        case 'customer.subscription.deleted': {
+            const subscription = event.data.object;
+            await Subscription.findOneAndUpdate(
+              { stripeSubscriptionId: subscription.id },
+              { status: 'canceled' } // ou subscription.status que também será 'canceled'
+            );
+            console.log(`✅ Subscrição ${subscription.id} marcada como cancelada.`);
+            break;
+        }
+
+        default:
+            console.log(`🔔 Evento não tratado do tipo: ${event.type}`);
     }
 
-    // 5. CONFIRMAÇÃO: Enviamos uma resposta 200 OK ao Stripe para ele saber que
-    // recebemos e processámos o evento com sucesso. Se não o fizermos, o Stripe
-    // vai continuar a tentar enviar o mesmo evento várias vezes.
+    // Devolver uma resposta 200 para confirmar o recebimento do evento
     res.status(200).send();
 });
 
