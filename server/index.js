@@ -20,6 +20,8 @@ const connectDB = async () => {
 
 connectDB();
 
+app.use('/api/webhooks', require('./routes/webhooks'));
+
 // Init Middleware
 // Isto permite-nos receber dados em req.body no formato json
 app.use(express.json());
