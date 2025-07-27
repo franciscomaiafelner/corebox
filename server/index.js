@@ -35,6 +35,7 @@ app.use('/api/users', require('./routes/users')); // Rota para utilizadores (reg
 app.use('/api/auth', require('./routes/auth')); // Rota de autenticação
 app.use('/api/products', require('./routes/products')); // Rota para produtos (caixas de subscrição)
 app.use('/api/payments', require('./routes/payments')); // Rota para pagamentos (Stripe)
+app.use('/api/subscriptions', require('./routes/subscriptions')); // Rota para subscrições (gestão de subscrições do utilizador)
 
 app.listen(PORT, () => {
   console.log(`Servidor a correr na porta ${PORT}`);

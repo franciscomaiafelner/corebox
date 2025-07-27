@@ -32,6 +32,10 @@ const HomePage = () => {
           {authState.isAuthenticated ? (
             <>
               <span>Olá, {authState.user.name}!</span>
+              
+              {/* ADICIONÁMOS O LINK AQUI */}
+              <Link to="/my-subscriptions" style={{ marginLeft: '1rem' }}>As Minhas Subscrições</Link>
+              
               <button onClick={logout} style={{ marginLeft: '1rem' }}>Logout</button>
             </>
           ) : (
