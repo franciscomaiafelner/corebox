@@ -10,6 +10,20 @@ const MySubscriptions = () => {
   const [subscriptions, setSubscriptions] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
+  const [isRedirecting, setIsRedirecting] = useState(false);
+
+  const handleManageSubscription = async () => {
+    setIsRedirecting(true);
+    try {
+      const res = await api.post('/subscriptions/manage');
+      // Redireciona o utilizador para o portal do Stripe
+      window.location.href = res.data.url;
+    } catch (err) {
+      console.error('Erro ao redirecionar para o portal de gestão:', err);
+      alert('Não foi possível aceder ao portal de gestão. Tente novamente.');
+      setIsRedirecting(false);
+    }
+  };
 
   useEffect(() => {
     // Apenas executa se o utilizador estiver autenticado
@@ -61,7 +75,9 @@ const MySubscriptions = () => {
                 <h3>{sub.product.name}</h3>
                 <p>Estado: <span style={{ fontWeight: 'bold', color: sub.status === 'active' ? 'green' : 'red' }}>{sub.status}</span></p>
                 <p>Próximo pagamento: {new Date(sub.currentPeriodEnd).toLocaleDateString()}</p>
-                <button disabled>Gerir Subscrição (Brevemente)</button>
+                <button onClick={handleManageSubscription} disabled={isRedirecting}>
+                  {isRedirecting ? 'A redirecionar...' : 'Gerir Subscrição'}
+                </button>
               </div>
             </div>
           ))}

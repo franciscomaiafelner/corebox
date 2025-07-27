@@ -16,8 +16,12 @@ const UserSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: ['consumer', 'seller', 'admin'], // Os únicos valores permitidos
-    default: 'consumer' // Por defeito, todos são consumidores
+    enum: ['consumer', 'seller', 'admin'],
+    default: 'consumer'
+  },
+  // ADICIONAR ESTE CAMPO
+  stripeCustomerId: {
+    type: String
   },
   createdAt: {
     type: Date,
