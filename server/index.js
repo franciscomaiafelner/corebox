@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const cors = require('cors'); // 1. IMPORTAR O PACOTE
 
 dotenv.config();
 
@@ -19,6 +20,13 @@ const connectDB = async () => {
 };
 
 connectDB();
+
+// A SOLUÇÃO ESTÁ AQUI
+// Configurar o CORS antes de todas as rotas
+app.use(cors({
+  origin: process.env.CLIENT_URL // Isto garante que SÓ o teu site na Vercel pode fazer pedidos
+}));
+
 
 app.use('/api/webhooks', require('./routes/webhooks'));
 
