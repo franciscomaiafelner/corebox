@@ -4,10 +4,12 @@ const express = require('express');
 const router = express.Router();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const Subscription = require('../models/Subscription');
+const User = require('../models/User');
 
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
 
 router.post('/stripe', express.raw({type: 'application/json'}), async (req, res) => {
+    // ... (verificação do webhook continua igual)
     const sig = req.headers['stripe-signature'];
     let event;
 
@@ -18,16 +20,14 @@ router.post('/stripe', express.raw({type: 'application/json'}), async (req, res)
         return res.status(400).send(`Webhook Error: ${err.message}`);
     }
 
+
     switch (event.type) {
+        // ... (outros cases ficam iguais)
         case 'checkout.session.completed': {
             const session = event.data.object;
             const { userId, productId } = session.metadata;
 
-            // CORREÇÃO 1: Verificar se customer_details e address existem
-            if (!session.customer_details || !session.customer_details.address) {
-                console.log('❌ Morada em falta no evento checkout.session.completed');
-                // Ainda assim continuamos, podemos querer guardar a subscrição sem morada
-            }
+            const subscriptionData = await stripe.subscriptions.retrieve(session.subscription);
             
             const address = session.customer_details.address;
             const shippingAddress = {
@@ -38,15 +38,13 @@ router.post('/stripe', express.raw({type: 'application/json'}), async (req, res)
                 country: address.country,
             };
 
-            const subscriptionData = await stripe.subscriptions.retrieve(session.subscription);
-
             const newSubscription = new Subscription({
                 user: userId,
                 product: productId,
-                stripeSubscriptionId: session.subscription,
-                status: subscriptionData.status, // Usar o status real da subscrição
-                currentPeriodEnd: new Date(session.created * 1000 + 30 * 24 * 60 * 60 * 1000), // Usar a data real
-                shippingAddress: shippingAddress // CORREÇÃO 2: Adicionar a morada aqui
+                stripeSubscriptionId: subscriptionData.id,
+                status: subscriptionData.status,
+                currentPeriodEnd: new Date(subscriptionData.current_period_end * 1000), 
+                shippingAddress: shippingAddress 
             });
 
             await newSubscription.save();
@@ -62,11 +60,11 @@ router.post('/stripe', express.raw({type: 'application/json'}), async (req, res)
                 currentPeriodEnd: new Date(subscription.current_period_end * 1000),
             };
 
-            // ATUALIZAÇÃO BÓNUS: Sincronizar a morada se ela for alterada no Portal do Cliente
             if (subscription.shipping && subscription.shipping.address) {
                 const address = subscription.shipping.address;
                 updateFields.shippingAddress = {
                     street: address.line1,
+                    street2: address.line2,
                     city: address.city,
                     postalCode: address.postal_code,
                     country: address.country,
@@ -81,8 +79,38 @@ router.post('/stripe', express.raw({type: 'application/json'}), async (req, res)
             console.log(`✅ Subscrição ${subscription.id} atualizada.`);
             break;
         }
-      
+
+        case 'customer.updated': {
+            const customer = event.data.object;
+
+            // ***** A CORREÇÃO ESTÁ AQUI *****
+            // Verificamos se a atualização contém o objeto 'address' diretamente
+            if (customer.address) { 
+                const address = customer.address;
+                const shippingAddress = {
+                    street: address.line1,
+                    street2: address.line2,
+                    city: address.city,
+                    postalCode: address.postal_code,
+                    country: address.country,
+                };
+
+                const user = await User.findOne({ stripeCustomerId: customer.id });
+                if (user) {
+                    await Subscription.updateMany(
+                        { user: user._id, status: 'active' },
+                        { $set: { shippingAddress: shippingAddress } }
+                    );
+                    console.log(`✅ Morada atualizada para todas as subscrições ativas do utilizador ${user._id}`);
+                }
+            } else {
+                console.log('❌ Nenhuma morada encontrada no evento customer.updated.');
+            }
+            break;
+        }
+
         case 'customer.subscription.deleted': {
+            // ... (fica igual)
             const subscription = event.data.object;
             await Subscription.findOneAndUpdate(
               { stripeSubscriptionId: subscription.id },
