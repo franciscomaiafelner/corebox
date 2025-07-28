@@ -27,7 +27,7 @@ const HomePage = () => {
   return (
     <div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
-        <h1>Bem-vindo ao CoreBox!</h1>
+        <h1>Bem-vindo!</h1>
         <div>
           {authState.isAuthenticated ? (
             <>
