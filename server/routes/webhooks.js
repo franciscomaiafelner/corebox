@@ -43,7 +43,7 @@ router.post('/stripe', express.raw({type: 'application/json'}), async (req, res)
                 product: productId,
                 stripeSubscriptionId: subscriptionData.id,
                 status: subscriptionData.status,
-                currentPeriodEnd: new Date(subscriptionData.current_period_end * 1000), 
+                currentPeriodEnd: new Date(session.created * 1000 + 30 * 24 * 60 * 60 * 1000), 
                 shippingAddress: shippingAddress 
             });
 
@@ -57,9 +57,9 @@ router.post('/stripe', express.raw({type: 'application/json'}), async (req, res)
             
             const updateFields = {
                 status: subscription.status,
-                currentPeriodEnd: new Date(subscription.current_period_end * 1000),
+                currentPeriodEnd: new Date(session.created * 1000 + 30 * 24 * 60 * 60 * 1000),
             };
-
+ 
             if (subscription.shipping && subscription.shipping.address) {
                 const address = subscription.shipping.address;
                 updateFields.shippingAddress = {
