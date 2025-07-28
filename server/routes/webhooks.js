@@ -43,7 +43,7 @@ router.post('/stripe', express.raw({type: 'application/json'}), async (req, res)
                 product: productId,
                 stripeSubscriptionId: subscriptionData.id,
                 status: subscriptionData.status,
-                currentPeriodEnd: new Date(session.created * 1000 + 30 * 24 * 60 * 60 * 1000), 
+                currentPeriodEnd: new Date(subscriptionData.items.data[0].current_period_end * 1000), 
                 shippingAddress: shippingAddress 
             });
 
@@ -57,7 +57,7 @@ router.post('/stripe', express.raw({type: 'application/json'}), async (req, res)
             
             const updateFields = {
                 status: subscription.status,
-                currentPeriodEnd: new Date(session.created * 1000 + 30 * 24 * 60 * 60 * 1000),
+                currentPeriodEnd: new Date(subscription.current_period_end * 1000),
             };
  
             if (subscription.shipping && subscription.shipping.address) {
@@ -121,7 +121,6 @@ router.post('/stripe', express.raw({type: 'application/json'}), async (req, res)
         }
 
         default:
-            console.log(`🔔 Evento não tratado do tipo: ${event.type}`);
     }
 
     res.status(200).send();
