@@ -50,6 +50,9 @@ router.post('/create-checkout-session', auth, async (req, res) => {
         },
       ],
       mode: 'subscription',
+      shipping_address_collection: {
+        allowed_countries: ['PT'], // Define para que países envias
+      },
       success_url: successUrl,
       cancel_url: cancelUrl,
       // Passar o ID do nosso utilizador e produto para o webhook

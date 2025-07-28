@@ -26,6 +26,13 @@ const SubscriptionSchema = new Schema({
     type: Date,
     default: Date.now
   },
+  shippingAddress: {
+    street: { type: String },
+    street2: { type: String },
+    city: { type: String },
+    postalCode: { type: String },
+    country: { type: String },
+  },
   currentPeriodEnd: {
     type: Date,
     required: true
