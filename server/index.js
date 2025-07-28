@@ -23,10 +23,11 @@ connectDB();
 
 // A SOLUÇÃO ESTÁ AQUI
 // Configurar o CORS antes de todas as rotas
-app.use(cors());
 
 
 app.use('/api/webhooks', require('./routes/webhooks'));
+
+app.use(cors());
 
 // Init Middleware
 // Isto permite-nos receber dados em req.body no formato json
