@@ -1,3 +1,5 @@
+// Ficheiro: server/routes/payments.js
+
 const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth(middleware)');
@@ -5,6 +7,7 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const User = require('../models/User');
 const Product = require('../models/Product');
+const Subscription = require('../models/Subscription'); // 1. IMPORTAR O MODELO
 
 // @route   POST api/payments/create-checkout-session
 // @desc    Criar uma nova sessão de checkout no Stripe
@@ -21,12 +24,23 @@ router.post('/create-checkout-session', auth, async (req, res) => {
       return res.status(404).json({ msg: 'Produto não encontrado.' });
     }
     
-    // NOTA: Assumindo que adicionámos 'stripePriceId' ao nosso modelo de Produto
     if (!product.stripePriceId) {
         return res.status(400).json({ msg: 'ID de preço do Stripe não configurado para este produto.' });
     }
 
-    // Obter ou criar o ID de cliente no Stripe
+    // 2. ADICIONAR A NOVA LÓGICA DE VERIFICAÇÃO AQUI
+    const existingSubscription = await Subscription.findOne({
+      user: userId,
+      product: productId,
+      status: 'active' // Apenas nos importamos com as que estão ativas
+    });
+
+    if (existingSubscription) {
+      return res.status(400).json({ msg: 'Você já tem uma subscrição ativa para este produto.' });
+    }
+    // FIM DA NOVA LÓGICA
+
+    // Obter ou criar o ID de cliente no Stripe (o resto do código continua igual)
     let stripeCustomerId = user.stripeCustomerId;
     if (!stripeCustomerId) {
       const customer = await stripe.customers.create({ email: user.email, name: user.name });
@@ -35,11 +49,9 @@ router.post('/create-checkout-session', auth, async (req, res) => {
       await user.save();
     }
 
-    // Definir os URLs de sucesso e cancelamento
     const successUrl = `${process.env.CLIENT_URL}/payment-success?session_id={CHECKOUT_SESSION_ID}`;
     const cancelUrl = `${process.env.CLIENT_URL}/product/${productId}`;
 
-    // Criar a sessão de checkout
     const session = await stripe.checkout.sessions.create({
       customer: stripeCustomerId,
       payment_method_types: ['card'],
@@ -51,18 +63,16 @@ router.post('/create-checkout-session', auth, async (req, res) => {
       ],
       mode: 'subscription',
       shipping_address_collection: {
-        allowed_countries: ['PT'], // Define para que países envias
+        allowed_countries: ['PT'],
       },
       success_url: successUrl,
       cancel_url: cancelUrl,
-      // Passar o ID do nosso utilizador e produto para o webhook
       metadata: {
         userId: userId,
         productId: productId
       }
     });
 
-    // Enviar o URL da sessão de volta para o cliente
     res.json({ url: session.url });
 
   } catch (err) {

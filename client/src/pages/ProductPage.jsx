@@ -28,17 +28,22 @@ const ProductPage = () => {
   const handleSubscriptionClick = async () => {
     setIsRedirecting(true);
     try {
-      // 1. Pedir ao nosso backend para criar a sessão de checkout
+      // Esta parte continua igual...
       const res = await api.post('/payments/create-checkout-session', {
         productId: product._id,
       });
-
-      // 2. Redirecionar o utilizador para o URL do Stripe recebido
       window.location.href = res.data.url;
 
     } catch (err) {
-      console.error('Erro ao redirecionar para o checkout:', err);
-      alert('Não foi possível iniciar o processo de pagamento. Tente novamente.');
+      // --- AQUI ESTÁ A ALTERAÇÃO ---
+
+      // 1. Extrair a mensagem específica do erro da API, se existir.
+      const errorMessage = err.response?.data?.msg || 'Não foi possível iniciar o processo de pagamento. Tente novamente.';
+
+      // 2. Mostrar a mensagem (específica ou genérica) no alerta.
+      console.error('Erro ao redirecionar para o checkout:', err.response?.data || err.message);
+      alert(errorMessage);
+      
       setIsRedirecting(false);
     }
   };
