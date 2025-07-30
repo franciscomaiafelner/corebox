@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios'; // Importar o axios
+import api from '../utils/api';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -19,7 +19,7 @@ const Register = () => {
     try {
       // Criar o pedido POST para a nossa API
       // Graças ao proxy, podemos usar um URL relativo
-      const res = await axios.post('/api/users/register', formData);
+      const res = await api.post('/users/register', formData);
       
       console.log('Resposta do servidor:', res.data); // Ex: { msg: 'Utilizador registado com sucesso' }
       alert('Registo bem-sucedido!');
