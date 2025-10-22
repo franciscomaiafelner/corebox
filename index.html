@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CoreBox Prototype</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="top-bar">
+    <div class="brand">
+      <span class="brand-mark">⬢</span>
+      <span class="brand-name">CoreBox</span>
+    </div>
+    <nav class="top-nav">
+      <button class="link-button" data-view="consumer-home">Marketplace</button>
+      <button class="link-button" data-view="seller-app">Seller Portal</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="consumer-home" class="view active">
+      <div class="hero">
+        <div class="hero-copy">
+          <h1>Europe’s Marketplace for Subscription Discovery</h1>
+          <p>CoreBox connects curious shoppers with independent makers, while keeping every renewal, payment, and reward under one secure roof.</p>
+          <div class="hero-actions">
+            <button id="openConsumerPanel" class="primary">Manage My Subscriptions</button>
+            <button id="switchToSeller" class="ghost">Switch to Seller App</button>
+          </div>
+        </div>
+        <div class="hero-media">
+          <div class="hero-video">
+            <video autoplay muted loop playsinline aria-label="Family enjoying the ceramics DIY kit">
+              <source src="videos/hero.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+      </div>
+
+      <section class="section">
+        <header class="section-header">
+          <h2>Spotlight This Month</h2>
+          <a class="link-button" href="collections.html">Explore Every Collection</a>
+        </header>
+        <div class="spotlight-grid">
+          <article class="spotlight-card">
+            <div class="spotlight-thumb spotlight-thumb-food" aria-hidden="true">
+              <span class="spotlight-thumb-badge">Best Seller</span>
+            </div>
+            <div class="spotlight-card-content">
+              <div class="spotlight-card-header">
+                <span class="spotlight-pill">Premium Curation</span>
+                <h4>Artisanal Coffee</h4>
+              </div>
+              <p>Partner roasters across Europe deliver terroir-rich beans via CoreBox with carbon-offset shipping.</p>
+              <div class="spotlight-footer">
+                <span class="tag">Food &amp; Drink</span>
+                <a class="spotlight-button" href="products/product-cafe-artesanal.html">View Box</a>
+              </div>
+            </div>
+          </article>
+          <article class="spotlight-card">
+            <div class="spotlight-thumb spotlight-thumb-wellness" aria-hidden="true">
+              <span class="spotlight-thumb-badge">Zen Mood</span>
+            </div>
+            <div class="spotlight-card-content">
+              <div class="spotlight-card-header">
+                <span class="spotlight-pill">Reading Ritual</span>
+                <h4>Curated Reading</h4>
+              </div>
+              <p>Independent publishers craft immersive narratives with sensory extras delivered in one sustainable parcel.</p>
+              <div class="spotlight-footer">
+                <span class="tag">Wellness</span>
+                <a class="spotlight-button" href="products/product-leitura-curada.html">View Box</a>
+              </div>
+            </div>
+          </article>
+          <article class="spotlight-card">
+            <div class="spotlight-thumb spotlight-thumb-family" aria-hidden="true">
+              <span class="spotlight-thumb-badge">Handcrafted</span>
+            </div>
+            <div class="spotlight-card-content">
+              <div class="spotlight-card-header">
+                <span class="spotlight-pill">Creative Challenge</span>
+                <h4>Ceramics DIY Kit</h4>
+              </div>
+              <p>Local studios ship plastic-free kits with guided projects so every household can create, not accumulate.</p>
+              <div class="spotlight-footer">
+                <span class="tag">Family</span>
+                <a class="spotlight-button" href="products/product-kit-ceramica.html">View Box</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <h2>Why Shoppers Pick CoreBox</h2>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <h3>Unified Billing</h3>
+            <p>One payment profile across every subscription, complete with loyalty perks.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Discovery Mode</h3>
+            <p>Smart recommendations highlight the best-selling boxes in each category.</p>
+          </article>
+          <article class="feature-card">
+            <h3>One-Click Controls</h3>
+            <p>Pause, skip, or swap delivery windows in seconds - no support emails.</p>
+          </article>
+        </div>
+      </section>
+    </section>
+
+    <aside id="consumer-panel" class="overlay">
+      <div class="overlay-card">
+        <header class="overlay-header">
+          <h2>Active Subscriptions</h2>
+          <button id="closeConsumerPanel" class="icon-button" aria-label="Close panel">✕</button>
+        </header>
+        <ul id="subscriptionList" class="subscription-list"></ul>
+        <footer class="overlay-footer">
+          <button id="exploreBoxes" class="primary">Explore New Boxes</button>
+        </footer>
+      </div>
+    </aside>
+
+    <section id="seller-app" class="view">
+      <div class="seller-header">
+        <div>
+          <h1>Seller Performance Dashboard</h1>
+          <p class="subtitle">Centralize your operations: track trends, reconcile payouts, and orchestrate recurring shipments.</p>
+        </div>
+        <div class="seller-controls">
+          <button class="link-button tab active" data-target="seller-dashboard">Dashboard</button>
+          <button class="link-button tab" data-target="payments-view">Payments</button>
+          <button class="link-button tab" data-target="shipments-view">Shipments</button>
+          <button id="backToConsumer" class="ghost">Back to Marketplace</button>
+        </div>
+      </div>
+
+      <div id="seller-dashboard" class="seller-view active">
+        <div class="kpi-grid">
+          <article class="kpi-card">
+            <span class="kpi-label">Monthly Revenue</span>
+            <span class="kpi-value">$42,530</span>
+            <span class="kpi-trend positive">▲ 8.3% vs last month</span>
+          </article>
+          <article class="kpi-card">
+            <span class="kpi-label">Active Subscribers</span>
+            <span class="kpi-value">1,286</span>
+            <span class="kpi-trend positive">▲ 3.1% vs last month</span>
+          </article>
+          <article class="kpi-card">
+            <span class="kpi-label">Churn Rate</span>
+            <span class="kpi-value">2.4%</span>
+            <span class="kpi-trend neutral">No change</span>
+          </article>
+          <article class="kpi-card">
+            <span class="kpi-label">Average Order Value</span>
+            <span class="kpi-value">$33.80</span>
+            <span class="kpi-trend negative">▼ 1.2% vs last month</span>
+          </article>
+        </div>
+
+        <div class="chart-card">
+          <header>
+            <h2>Revenue Trajectory</h2>
+            <span class="chip">Last 6 months</span>
+          </header>
+          <canvas id="performanceChart" width="680" height="320" aria-label="Revenue chart" role="img"></canvas>
+        </div>
+
+        <div class="seller-quick-actions">
+          <button class="primary" data-target="payments-view">Go to Payments</button>
+          <button class="secondary" data-target="shipments-view">Manage Recurring Shipments</button>
+        </div>
+      </div>
+
+      <div id="payments-view" class="seller-view">
+        <header class="section-header">
+          <h2>Automated Payouts</h2>
+          <button class="secondary" data-target="seller-dashboard">Back to Dashboard</button>
+        </header>
+        <p class="section-description">Review your payout cadence, reconcile transfers, and keep tabs on payment statuses - all backed by CoreBox billing automation.</p>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Payout Date</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Orders</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>July 14</td>
+              <td>$8,740</td>
+              <td><span class="status status-paid">Paid</span></td>
+              <td>214</td>
+            </tr>
+            <tr>
+              <td>July 7</td>
+              <td>$7,320</td>
+              <td><span class="status status-processing">Processing</span></td>
+              <td>183</td>
+            </tr>
+            <tr>
+              <td>June 30</td>
+              <td>$6,890</td>
+              <td><span class="status status-paid">Paid</span></td>
+              <td>176</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <section class="section">
+          <h3>Upcoming Billing Events</h3>
+          <ul class="timeline">
+            <li>
+              <span class="timeline-date">July 18</span>
+              <p>Renewal batch for Coffee Connoisseur (389 orders)</p>
+            </li>
+            <li>
+              <span class="timeline-date">July 21</span>
+              <p>Dispute window closes for June shipments</p>
+            </li>
+            <li>
+              <span class="timeline-date">July 28</span>
+              <p>Seasonal add-on flash promotions go live</p>
+            </li>
+          </ul>
+        </section>
+      </div>
+
+      <div id="shipments-view" class="seller-view">
+        <header class="section-header">
+          <h2>Recurring Shipment Management</h2>
+          <button class="secondary" data-target="seller-dashboard">Back to Dashboard</button>
+        </header>
+        <p class="section-description">Validate addresses, confirm fulfillment windows, and print shipping labels on-demand.</p>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Recipient</th>
+              <th>Address</th>
+              <th>Next Ship Date</th>
+              <th>Box</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Sara Liang</td>
+              <td>1020 Market St, San Francisco, CA</td>
+              <td>July 17</td>
+              <td>Chef's Tasting Tour</td>
+              <td><span class="status status-ready">Ready</span></td>
+            </tr>
+            <tr>
+              <td>Leo Kramer</td>
+              <td>14 River Rd, Austin, TX</td>
+              <td>July 18</td>
+              <td>STEM Explorer Lab</td>
+              <td><span class="status status-warning">Address Check</span></td>
+            </tr>
+            <tr>
+              <td>Riya Chandra</td>
+              <td>89 Cedar Ave, Seattle, WA</td>
+              <td>July 19</td>
+              <td>Wellness Reset Ritual</td>
+              <td><span class="status status-ready">Ready</span></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="seller-quick-actions">
+          <button id="generatePdf" class="primary">Generate Shipping Labels (PDF)</button>
+          <button class="ghost" data-target="seller-dashboard">Return to Dashboard</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">
+    <p>Prototype preview built for the CoreBox marketplace experience.</p>
+  </footer>
+
+  <script src="subscription-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

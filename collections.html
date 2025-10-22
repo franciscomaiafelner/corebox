@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CoreBox Collections</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles-product.css">
+  <link rel="stylesheet" href="collections.css">
+</head>
+<body class="collections-body">
+  <header class="collections-header">
+    <a href="index.html" class="collections-brand">
+      <span class="brand-mark">⬢</span>
+      <span class="brand-name">CoreBox</span>
+    </a>
+    <div class="collections-actions">
+      <a class="secondary back-button" href="index.html">Back to Home</a>
+      <a class="primary manage-button" href="index.html#manage-subscriptions">Manage My Subscriptions</a>
+    </div>
+  </header>
+
+  <main class="collections-main">
+    <section class="collections-hero">
+      <div class="hero-copy">
+        <h1>Discover Every CoreBox Collection</h1>
+        <p>Choose a subscription to match your mood—gastronomy adventures, immersive reads, or creativity boosts delivered right to you.</p>
+        <div class="filter-pills">
+          <button class="filter-pill is-active" data-filter="all">All</button>
+          <button class="filter-pill" data-filter="food">Food &amp; Drink</button>
+          <button class="filter-pill" data-filter="wellness">Wellness</button>
+          <button class="filter-pill" data-filter="family">Family &amp; Hobby</button>
+        </div>
+      </div>
+      <div class="hero-media">
+        <div class="orbit">
+          <span class="orbit-dot orbit-dot-1">Taste</span>
+          <span class="orbit-dot orbit-dot-2">Create</span>
+          <span class="orbit-dot orbit-dot-3">Immerse</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="collections-grid" id="collectionsGrid"></section>
+  </main>
+
+  <footer class="collections-footer">
+    <p>CoreBox Collections • Browse. Subscribe. Enjoy.</p>
+  </footer>
+
+  <script src="subscription-data.js"></script>
+  <script src="collections.js"></script>
+</body>
+</html>
