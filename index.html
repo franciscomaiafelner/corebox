@@ -15,7 +15,7 @@
     </div>
     <nav class="top-nav">
       <button class="link-button" data-view="consumer-home">Marketplace</button>
-      <button class="link-button" data-view="seller-app">Seller Portal</button>
+      <button class="link-button" data-view="seller-app">Switch to Seller Portal</button>
     </nav>
   </header>
 
@@ -135,8 +135,8 @@
           <h1>Artisanal Coffee Seller Console</h1>
           <p class="subtitle">Track performance, payouts, and shipments for the Artisanal Coffee CoreBox subscription.</p>
           <div class="seller-callout" role="note">
-            <strong>Simulation:</strong>
-            This panel mirrors the real seller workspace for the Artisanal Coffee subscription box.
+            <strong>Prototype Simulation ⚙️</strong>
+            This panel mirrors the seller workspace for the Artisanal Coffee monthly subscription box.
           </div>
         </div>
         <div class="seller-controls">
@@ -150,24 +150,19 @@
       <div id="seller-dashboard" class="seller-view active">
         <div class="kpi-grid">
           <article class="kpi-card">
-            <span class="kpi-label">Monthly Coffee Revenue</span>
-            <span class="kpi-value">$42,530</span>
-            <span class="kpi-trend positive">▲ 8.3% vs last month</span>
+            <span class="kpi-label">Monthly Revenue</span>
+            <span class="kpi-value">$6,080</span>
+            <span class="kpi-trend positive">▲ 5.1% vs last month</span>
           </article>
           <article class="kpi-card">
-            <span class="kpi-label">Active Coffee Subscribers</span>
-            <span class="kpi-value">1,286</span>
-            <span class="kpi-trend positive">▲ 3.1% vs last month</span>
+            <span class="kpi-label">Active Subscribers</span>
+            <span class="kpi-value">190</span>
+            <span class="kpi-trend positive">▲ 2.9% vs last month</span>
           </article>
           <article class="kpi-card">
             <span class="kpi-label">Skip &amp; Churn Rate</span>
-            <span class="kpi-value">2.4%</span>
-            <span class="kpi-trend neutral">No change</span>
-          </article>
-          <article class="kpi-card">
-            <span class="kpi-label">Average Box Value</span>
-            <span class="kpi-value">$33.80</span>
-            <span class="kpi-trend negative">▼ 1.2% vs last month</span>
+            <span class="kpi-value">1.6%</span>
+            <span class="kpi-trend positive">▼ 0.4 pts vs last month</span>
           </article>
         </div>
 
@@ -180,8 +175,8 @@
         </div>
 
         <div class="seller-quick-actions">
-          <button class="primary" data-target="payments-view">Go to Payments</button>
-          <button class="secondary" data-target="shipments-view">Manage Recurring Shipments</button>
+          <button class="primary" data-target="payments-view">Review Coffee Payouts</button>
+          <button class="secondary" data-target="shipments-view">Manage Coffee Shipments</button>
         </div>
       </div>
 
@@ -191,7 +186,26 @@
           <button class="secondary" data-target="seller-dashboard">Back to Dashboard</button>
         </header>
         <p class="section-description">Review your payout cadence for Artisanal Coffee orders, reconcile transfers, and keep tabs on payment statuses.</p>
-        <table class="data-table">
+        <div class="next-payout-highlight" id="nextPayoutHighlight">
+          <div class="metric is-primary">
+            <span>Next payout</span>
+            <strong>July 25, 2024</strong>
+          </div>
+          <div class="metric">
+            <span>Expected amount</span>
+            <strong>$6,080</strong>
+          </div>
+          <div class="metric">
+            <span>Orders</span>
+            <strong>190</strong>
+          </div>
+          <div class="metric trend">
+            <span>Change</span>
+            <strong>▲ 5.1% vs last payout</strong>
+          </div>
+        </div>
+
+        <table class="data-table" id="payoutTable">
           <thead>
             <tr>
               <th>Payout Date</th>
@@ -202,43 +216,84 @@
           </thead>
           <tbody>
             <tr>
-              <td>July 14</td>
-              <td>$8,740</td>
+              <td>June 25, 2024</td>
+              <td>$5,790</td>
               <td><span class="status status-paid">Paid</span></td>
-              <td>214</td>
+              <td>182</td>
             </tr>
             <tr>
-              <td>July 7</td>
-              <td>$7,320</td>
-              <td><span class="status status-processing">Processing</span></td>
-              <td>183</td>
+              <td>May 25, 2024</td>
+              <td>$5,510</td>
+              <td><span class="status status-paid">Paid</span></td>
+              <td>174</td>
             </tr>
             <tr>
-              <td>June 30</td>
-              <td>$6,890</td>
+              <td>April 25, 2024</td>
+              <td>$5,260</td>
               <td><span class="status status-paid">Paid</span></td>
-              <td>176</td>
+              <td>166</td>
+            </tr>
+            <tr>
+              <td>March 25, 2024</td>
+              <td>$5,010</td>
+              <td><span class="status status-paid">Paid</span></td>
+              <td>158</td>
+            </tr>
+            <tr>
+              <td>February 25, 2024</td>
+              <td>$4,780</td>
+              <td><span class="status status-paid">Paid</span></td>
+              <td>150</td>
+            </tr>
+            <tr>
+              <td>January 25, 2024</td>
+              <td>$4,520</td>
+              <td><span class="status status-paid">Paid</span></td>
+              <td>142</td>
+            </tr>
+            <tr>
+              <td>December 25, 2023</td>
+              <td>$4,280</td>
+              <td><span class="status status-paid">Paid</span></td>
+              <td>134</td>
+            </tr>
+            <tr>
+              <td>November 25, 2023</td>
+              <td>$4,010</td>
+              <td><span class="status status-paid">Paid</span></td>
+              <td>126</td>
+            </tr>
+            <tr>
+              <td>October 25, 2023</td>
+              <td>$3,790</td>
+              <td><span class="status status-paid">Paid</span></td>
+              <td>118</td>
+            </tr>
+            <tr>
+              <td>September 25, 2023</td>
+              <td>$3,560</td>
+              <td><span class="status status-paid">Paid</span></td>
+              <td>111</td>
+            </tr>
+            <tr>
+              <td>August 25, 2023</td>
+              <td>$3,320</td>
+              <td><span class="status status-paid">Paid</span></td>
+              <td>103</td>
+            </tr>
+            <tr>
+              <td>July 25, 2023</td>
+              <td>$3,120</td>
+              <td><span class="status status-paid">Paid</span></td>
+              <td>96</td>
             </tr>
           </tbody>
         </table>
 
-        <section class="section">
-          <h3>Upcoming Billing Events</h3>
-          <ul class="timeline">
-            <li>
-              <span class="timeline-date">July 18</span>
-              <p>Renewal batch for Artisanal Coffee (389 orders)</p>
-            </li>
-            <li>
-              <span class="timeline-date">July 21</span>
-              <p>Roastery inventory audit for new Honduras microlot</p>
-            </li>
-            <li>
-              <span class="timeline-date">July 28</span>
-              <p>Seasonal add-on cupping event announcement to subscribers</p>
-            </li>
-          </ul>
-        </section>
+        <div class="payout-footer">
+          <button class="secondary" id="loadMorePayouts">Load previous payouts</button>
+        </div>
+
       </div>
 
       <div id="shipments-view" class="seller-view">
@@ -247,43 +302,26 @@
           <button class="secondary" data-target="seller-dashboard">Back to Dashboard</button>
         </header>
         <p class="section-description">Validate addresses, confirm fulfillment windows, and print shipping labels for your Artisanal Coffee deliveries.</p>
-        <table class="data-table">
+        <div class="shipment-toolbar">
+          <div class="shipment-actions">
+            <button id="generatePdf" class="primary">Generate Shipping Labels (PDF)</button>
+          </div>
+          <label class="shipment-search">
+            <span class="sr-only">Search shipments</span>
+            <input type="search" id="shipmentsSearch" placeholder="Search by customer or address" />
+          </label>
+        </div>
+        <table class="data-table" id="shipmentsTable">
           <thead>
             <tr>
               <th>Recipient</th>
               <th>Address</th>
-              <th>Next Ship Date</th>
-              <th>Box</th>
-              <th>Status</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>Amelia Duarte</td>
-              <td>Rua do Sol 45, Lisboa, Portugal</td>
-              <td>July 17</td>
-              <td>Artisanal Coffee</td>
-              <td><span class="status status-ready">Ready</span></td>
-            </tr>
-            <tr>
-              <td>Jonas Meier</td>
-              <td>Talstrasse 88, Zürich, Switzerland</td>
-              <td>July 18</td>
-              <td>Artisanal Coffee</td>
-              <td><span class="status status-warning">Address Check</span></td>
-            </tr>
-            <tr>
-              <td>Riya Chandra</td>
-              <td>89 Cedar Ave, Seattle, WA</td>
-              <td>July 19</td>
-              <td>Artisanal Coffee</td>
-              <td><span class="status status-ready">Ready</span></td>
-            </tr>
-          </tbody>
+          <tbody id="shipmentsTableBody"></tbody>
         </table>
-        <div class="seller-quick-actions">
-          <button id="generatePdf" class="primary">Generate Shipping Labels (PDF)</button>
-          <button class="ghost" data-target="seller-dashboard">Return to Dashboard</button>
+        <div class="shipments-footer">
+          <button class="secondary" id="loadMoreShipments">Load more recipients</button>
         </div>
       </div>
     </section>

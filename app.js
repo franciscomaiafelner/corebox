@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   const views = Array.from(document.querySelectorAll('.view'));
   const topNavButtons = Array.from(document.querySelectorAll('[data-view]'));
+  const navMarketplaceButton = document.querySelector('.top-nav [data-view="consumer-home"]');
+  const navSellerToggle = document.querySelector('.top-nav [data-view="seller-app"]');
   const overlay = document.getElementById('consumer-panel');
   const openPanelButton = document.getElementById('openConsumerPanel');
   const closePanelButton = document.getElementById('closeConsumerPanel');
@@ -13,9 +15,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const pdfButton = document.getElementById('generatePdf');
   const subscriptionList = document.getElementById('subscriptionList');
   const exploreBoxesButton = document.getElementById('exploreBoxes');
+  const loadMorePayoutsButton = document.getElementById('loadMorePayouts');
+  const payoutTable = document.getElementById('payoutTable');
+  const shipmentsTableBody = document.getElementById('shipmentsTableBody');
+  const shipmentsSearchInput = document.getElementById('shipmentsSearch');
+  const loadMoreShipmentsButton = document.getElementById('loadMoreShipments');
+  let shipmentsLimit = 60;
   const store = window.CoreBoxSubscriptions;
   let subscriptions = store ? store.loadSubscriptions() : [];
   let manageFocusId = null;
+  let currentView = 'consumer-home';
 
   const currentUrl = new URL(window.location.href);
   if (currentUrl.searchParams.has('manage')) {
@@ -32,13 +41,30 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     topNavButtons.forEach((button) => {
-      if (button.dataset.view) {
+      if (button === navSellerToggle) {
+        button.classList.remove('active');
+      } else if (button.dataset.view) {
         button.classList.toggle('active', button.dataset.view === id);
       }
     });
 
+    currentView = id;
+    updateNavToggleText();
+
     if (id === 'seller-app') {
       showSellerView('seller-dashboard');
+      window.requestAnimationFrame(drawPerformanceChart);
+    }
+  }
+
+  function updateNavToggleText() {
+    if (navSellerToggle) {
+      navSellerToggle.textContent =
+        currentView === 'seller-app' ? 'Switch to Marketplace' : 'Switch to Seller Portal';
+    }
+    if (navMarketplaceButton) {
+      navMarketplaceButton.textContent = 'Marketplace';
+      navMarketplaceButton.classList.toggle('active', currentView === 'consumer-home');
     }
   }
 
@@ -250,7 +276,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   topNavButtons.forEach((button) => {
     button.addEventListener('click', () => {
-      const target = button.dataset.view;
+      let target = button.dataset.view;
+      if (button === navSellerToggle) {
+        target = currentView === 'seller-app' ? 'consumer-home' : 'seller-app';
+      }
       if (target) {
         showView(target);
       }
@@ -318,9 +347,212 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  if (loadMorePayoutsButton && payoutTable) {
+    const additionalRows = [
+      { date: 'June 25, 2023', amount: '$2,940', status: 'Paid', orders: 90 },
+      { date: 'May 25, 2023', amount: '$2,720', status: 'Paid', orders: 84 },
+      { date: 'April 25, 2023', amount: '$2,520', status: 'Paid', orders: 78 },
+    ];
+    let appended = false;
+
+    loadMorePayoutsButton.addEventListener('click', () => {
+      if (appended) {
+        loadMorePayoutsButton.disabled = true;
+        loadMorePayoutsButton.textContent = 'All payouts loaded';
+        return;
+      }
+
+      const tbody = payoutTable.querySelector('tbody');
+      if (!tbody) {
+        return;
+      }
+
+      additionalRows.forEach((row) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${row.date}</td>
+          <td>${row.amount}</td>
+          <td><span class="status status-paid">${row.status}</span></td>
+          <td>${row.orders}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      appended = true;
+      loadMorePayoutsButton.textContent = 'All payouts loaded';
+      loadMorePayoutsButton.disabled = true;
+    });
+  }
+
+  const shipmentsDataset = (() => {
+    const firstNames = [
+      'Amelia',
+      'Jonas',
+      'Riya',
+      'Liam',
+      'Maya',
+      'Oliver',
+      'Sofia',
+      'Mateo',
+      'Elena',
+      'Lucas',
+      'Ines',
+      'Noah',
+      'Eva',
+      'Leo',
+      'Clara',
+      'Nico',
+      'Aisha',
+      'Hugo',
+      'Camila',
+      'Sebastian',
+    ];
+    const lastNames = [
+      'Duarte',
+      'Meier',
+      'Chandra',
+      'Gallagher',
+      'Bianchi',
+      'Ito',
+      'Svensson',
+      'Novak',
+      'Costa',
+      'Silva',
+      'Kowalski',
+      'Moreau',
+      'Fernandez',
+      'Larsen',
+      'Khan',
+      'Yamamoto',
+      'Petrov',
+      'Nilsen',
+      'Andersson',
+      'Ibarra',
+    ];
+    const streetNames = [
+      'Rua do Sol',
+      'Talstrasse',
+      'Cedar Avenue',
+      'Oak Lane',
+      'Harbor Way',
+      'Via Roma',
+      'Maple Street',
+      'Seaside Boulevard',
+      'Elm Terrace',
+      'Garden Lane',
+      'Liberty Road',
+      'Utrechtstraat',
+      'Birch Way',
+      'Canal Street',
+      'Aurora Avenue',
+      'Highland Road',
+      'Lakeview Drive',
+      'Meadow Lane',
+      'Riverwalk',
+      'Sunset Street',
+    ];
+    const cityData = [
+      { city: 'Lisbon', country: 'Portugal' },
+      { city: 'Zürich', country: 'Switzerland' },
+      { city: 'Seattle, WA', country: 'USA' },
+      { city: 'Dublin', country: 'Ireland' },
+      { city: 'Milan', country: 'Italy' },
+      { city: 'Tokyo', country: 'Japan' },
+      { city: 'Stockholm', country: 'Sweden' },
+      { city: 'Prague', country: 'Czechia' },
+      { city: 'Porto', country: 'Portugal' },
+      { city: 'Barcelona', country: 'Spain' },
+      { city: 'Copenhagen', country: 'Denmark' },
+      { city: 'Paris', country: 'France' },
+      { city: 'Berlin', country: 'Germany' },
+      { city: 'Oslo', country: 'Norway' },
+      { city: 'Madrid', country: 'Spain' },
+      { city: 'Reykjavik', country: 'Iceland' },
+      { city: 'Vienna', country: 'Austria' },
+      { city: 'Antwerp', country: 'Belgium' },
+      { city: 'Tallinn', country: 'Estonia' },
+      { city: 'Brussels', country: 'Belgium' },
+    ];
+    const houseNumbers = Array.from({ length: 50 }, (_, index) => index + 10);
+
+    const dataset = [];
+    let comboIndex = 0;
+
+    while (dataset.length < 190) {
+      const first = firstNames[comboIndex % firstNames.length];
+      const last = lastNames[Math.floor(comboIndex / firstNames.length) % lastNames.length];
+      const street = streetNames[(comboIndex * 3) % streetNames.length];
+      const number = houseNumbers[comboIndex % houseNumbers.length];
+      const city = cityData[(comboIndex * 2) % cityData.length];
+
+      dataset.push({
+        name: `${first} ${last}`,
+        address: `${street} ${number}, ${city.city}, ${city.country}`,
+      });
+      comboIndex += 1;
+    }
+
+    return dataset;
+  })();
+
+  function renderShipments(filterText = '') {
+    if (!shipmentsTableBody) {
+      return;
+    }
+
+    const normalized = filterText.trim().toLowerCase();
+    const list = normalized
+      ? shipmentsDataset.filter((entry) => {
+          const haystack = `${entry.name} ${entry.address}`.toLowerCase();
+          return haystack.includes(normalized);
+        })
+      : shipmentsDataset;
+
+    shipmentsTableBody.innerHTML = '';
+    const limit = shipmentsLimit || list.length;
+    list.slice(0, limit).forEach((entry) => {
+      const row = document.createElement('tr');
+      const recipient = document.createElement('td');
+      recipient.textContent = entry.name;
+      const address = document.createElement('td');
+      address.textContent = entry.address;
+      row.appendChild(recipient);
+      row.appendChild(address);
+      shipmentsTableBody.appendChild(row);
+    });
+  }
+
+  if (shipmentsSearchInput) {
+    shipmentsSearchInput.addEventListener('input', (event) => {
+      renderShipments(event.target.value);
+    });
+  }
+
+  if (loadMoreShipmentsButton) {
+    loadMoreShipmentsButton.addEventListener('click', () => {
+      shipmentsLimit = Math.min(shipmentsLimit + 40, shipmentsDataset.length);
+      renderShipments(shipmentsSearchInput ? shipmentsSearchInput.value : '');
+      if (shipmentsLimit >= shipmentsDataset.length) {
+        loadMoreShipmentsButton.disabled = true;
+        loadMoreShipmentsButton.textContent = 'All recipients loaded';
+      }
+    });
+  }
+
+  renderShipments();
+  updateNavToggleText();
+
   renderSubscriptions();
   maybeOpenPanelFromDeepLink();
   drawPerformanceChart();
+
+  let chartResizeTimeout = null;
+  window.addEventListener('resize', () => {
+    if (chartResizeTimeout) {
+      clearTimeout(chartResizeTimeout);
+    }
+    chartResizeTimeout = setTimeout(drawPerformanceChart, 160);
+  });
 });
 
 function drawPerformanceChart() {
@@ -329,32 +561,47 @@ function drawPerformanceChart() {
     return;
   }
 
+  const parent = canvas.parentElement;
+  let containerWidth = canvas.clientWidth || 680;
+  if (parent) {
+    const computed = window.getComputedStyle(parent);
+    const paddingX =
+      parseFloat(computed.paddingLeft || '0') + parseFloat(computed.paddingRight || '0');
+    containerWidth = Math.max(320, parent.clientWidth - paddingX);
+  }
+  const logicalWidth = Math.max(360, Math.floor(containerWidth));
+  const logicalHeight = Math.max(240, Math.round(logicalWidth * 0.48));
+
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = logicalWidth * dpr;
+  canvas.height = logicalHeight * dpr;
+  canvas.style.width = `${logicalWidth}px`;
+  canvas.style.height = `${logicalHeight}px`;
+
   const ctx = canvas.getContext('2d');
   if (!ctx) {
     return;
   }
 
-  const dpr = window.devicePixelRatio || 1;
   if (dpr !== 1) {
-    const logicalWidth = canvas.width;
-    const logicalHeight = canvas.height;
-    canvas.width = logicalWidth * dpr;
-    canvas.height = logicalHeight * dpr;
-    canvas.style.width = `${logicalWidth}px`;
-    canvas.style.height = `${logicalHeight}px`;
     ctx.scale(dpr, dpr);
   }
 
-  const dataPoints = [28500, 31200, 33650, 35800, 39500, 42530];
+  const dataPoints = [4780, 5010, 5260, 5510, 5790, 6080];
   const labels = ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'];
-  const margin = { top: 36, right: 24, bottom: 46, left: 60 };
-  const width = canvas.width / dpr;
-  const height = canvas.height / dpr;
+  const width = logicalWidth;
+  const height = logicalHeight;
+  const margin = {
+    top: 32,
+    right: 24,
+    bottom: 48,
+    left: width < 520 ? 48 : 64,
+  };
   const chartWidth = width - margin.left - margin.right;
   const chartHeight = height - margin.top - margin.bottom;
 
-  const maxValue = Math.max(...dataPoints) * 1.1;
-  const minValue = Math.min(...dataPoints) * 0.9;
+  const maxValue = Math.max(...dataPoints) * 1.06;
+  const minValue = Math.min(...dataPoints) * 0.94;
   const range = maxValue - minValue;
 
   ctx.clearRect(0, 0, width, height);
@@ -373,12 +620,13 @@ function drawPerformanceChart() {
     ctx.lineTo(width - margin.right, y);
     ctx.stroke();
 
-    const value = maxValue - (range / gridLineCount) * i;
+    const rawValue = maxValue - (range / gridLineCount) * i;
+    const labelValue = Math.round(rawValue / 10) * 10;
     ctx.fillStyle = '#516170';
     ctx.font = '12px Inter, sans-serif';
     ctx.textAlign = 'right';
     ctx.textBaseline = 'middle';
-    ctx.fillText(`$${Math.round(value).toLocaleString()}`, margin.left - 10, y);
+    ctx.fillText(`$${labelValue.toLocaleString()}`, margin.left - 10, y);
   }
 
   ctx.setLineDash([]);
@@ -426,5 +674,13 @@ function drawPerformanceChart() {
     ctx.strokeStyle = '#5850ec';
     ctx.lineWidth = 2;
     ctx.stroke();
+
+    if (index === dataPoints.length - 1) {
+      ctx.fillStyle = '#102031';
+      ctx.font = '12px Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'bottom';
+      ctx.fillText(`$${value.toLocaleString()}`, x, y - 12);
+    }
   });
 }
