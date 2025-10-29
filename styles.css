@@ -955,4 +955,19 @@ main {
   .seller-quick-actions {
     flex-direction: column;
   }
+
+  .seller-controls {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    width: 100%;
+  }
+
+  .seller-controls .tab {
+    justify-self: stretch;
+  }
+
+  .seller-controls #backToConsumer {
+    grid-column: 1 / -1;
+  }
 }
