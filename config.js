@@ -1,16 +1,4 @@
-const getEnv = () => {
-    const hostname = window.location.hostname;
 
-    // Debug: Isto vai aparecer na consola do browser (F12)
-    console.log("Hostname detetado:", hostname);
-
-    if (hostname === 'localhost' || hostname === '127.0.0.1') {
-        return 'development';
-    }
-    return 'production';
-};
-
-/*
 const CONFIG = {
     development: {
         supabaseUrl: 'https://hdjjbplyqzfzkkueppsf.supabase.co',
@@ -34,5 +22,3 @@ const currentEnv = getEnv();
 const appConfig = CONFIG[currentEnv];
 
 console.log(`Environment: ${currentEnv}`);
-
-*/
