@@ -4,8 +4,8 @@ const CONFIG = {
         supabaseKey: 'sb_publishable_rjLlXKED9Z1hEfGQIt8z_w_UOG7BZwY'
     },
     production: {
-        supabaseUrl: 'COLOCAR AQUI O SUPABASE URL DA PROD',
-        supabaseKey: 'COLOCAR AQUI A PUBLISHABLE KEY DA PROD'
+        supabaseUrl: 'https://hdjjbplyqzfzkkueppsf.supabase.co',
+        supabaseKey: 'sb_publishable_rjLlXKED9Z1hEfGQIt8z_w_UOG7BZwY'
     }
 };
 
