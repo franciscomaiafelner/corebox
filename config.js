@@ -4,8 +4,8 @@ const CONFIG = {
         supabaseKey: 'sb_publishable_rjLlXKED9Z1hEfGQIt8z_w_UOG7BZwY'
     },
     production: {
-        supabaseUrl: 'https://hdjjbplyqzfzkkueppsf.supabase.co',
-        supabaseKey: 'sb_publishable_rjLlXKED9Z1hEfGQIt8z_w_UOG7BZwY'
+        supabaseUrl: 'https://svifzwpmcafkwrxadkvt.supabase.co',
+        supabaseKey: 'sb_publishable__149WhD6ENYlRbhEEvQe9g_g0TwX4Qy'
     }
 };
 
