@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fogo Box - Caixa de Subscrição d'O Homem que Comia Tudo</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lora:ital,wght@0,400;0,600;1,400&family=Roboto:wght@400;500;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="header-content">
+            <div class="warning-tape">
+                <span>Caixa de Subscrição oficial d'O Homem que Comia Tudo</span>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="product-container">
+        <!-- Carousel Section -->
+        <section class="carousel-section">
+            <button class="carousel-btn prev" aria-label="Previous Image">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+
+            <div class="carousel-track-container">
+                <ul class="carousel-track">
+                    <li class="carousel-slide current-slide">
+                        <img src="box.png" alt="The Artisan Chili Box with two hot sauces">
+                    </li>
+                    <li class="carousel-slide">
+                        <!-- Duplicate image for prototype demo purposes since we only generated one hero shot -->
+                        <img src="box.png" alt="The Artisan Chili Box Side View" style="filter: brightness(0.9);">
+                    </li>
+                    <li class="carousel-slide">
+                        <!-- Duplicate image for prototype demo purposes -->
+                        <img src="box.png" alt="The Artisan Chili Box Detail" style="filter: sepia(0.2);">
+                    </li>
+                </ul>
+            </div>
+
+            <button class="carousel-btn next" aria-label="Next Image">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+
+            <div class="carousel-nav">
+                <button class="carousel-indicator current-slide"></button>
+                <button class="carousel-indicator"></button>
+                <button class="carousel-indicator"></button>
+            </div>
+        </section>
+
+        <!-- Product Details Section -->
+        <section class="product-details">
+            <h1 class="product-title">The Fogo Box</h1>
+            <h2 class="product-subtitle">Entrega mensal de um molho picante + cartão explicativo.</h2>
+
+            <div class="purchase-action">
+                <div class="price-box">
+                    <span class="price-label">SUBSCRIÇÃO MENSAL</span>
+                    <span class="price-value">€14</span>
+                    <span class="price-shipping">(inclui transporte)</span>
+                </div>
+                <div class="subscription-container">
+                    <button class="subscribe-btn">SUBSCRIBE</button>
+                    <div class="user-status-row">
+                        <p id="user-email-display" class="user-info-text"></p>
+                        <button id="sign-out-btn" class="sign-out-btn" style="display: none;">LOGOUT</button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <div class="product-description">
+            <p>A caixa de subscrição oficial do Homem que Comia Tudo. Consiste numa entrega recorrente de uma box
+                com um molho picante “verdadeiro”. Este molho vem com um bilhete de identidade - lista os
+                ingredientes, nível de intensidade, combinações sugeridas, ciência culinária, e outros fun facts
+                relacionados com o frasco.</p>
+
+            <blockquote>
+                “Context and memory play powerful roles in all the truly great meals in one’s life.” -
+                <strong>Anthony Bourdain</strong>
+            </blockquote>
+
+            <h3>Porque é que o picante d’O Homem que Comia Tudo é melhor que o do supermercado?</h3>
+
+            <ol>
+                <li>Eles vêm ter contigo.</li>
+                <li>Têm efeito surpresa.</li>
+                <li>Dão para fazer conversa em jantares com convidados.</li>
+                <li>Não têm porcarias.</li>
+                <li>Dão para fazer um unboxing para a story.</li>
+                <li>Ficam mais bonitos na cozinha.</li>
+            </ol>
+
+        </div>
+
+    </main>
+
+    <div id="auth-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-box">
+            <button class="close-modal" id="close-modal">&times;</button>
+            <h2 class="modal-title">ENTRAR</h2>
+            <p class="modal-subtitle">Enviaremos um link de acesso para o teu email.</p>
+            <form id="auth-form">
+                <input type="email" id="email" class="modal-input" placeholder="O teu email" required>
+                <button type="submit" class="modal-submit-btn">ENVIAR LINK</button>
+            </form>
+            <div id="auth-message" class="auth-message"></div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <nav class="footer-nav">
+            <a href="mailto:fogobox.ohqct@gmail.com">fogobox.ohqct@gmail.com</a>
+        </nav>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
