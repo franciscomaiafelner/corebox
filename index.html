@@ -66,13 +66,15 @@
 
         <!-- Product Details Section -->
         <section class="product-details">
-            <h1 class="product-title">The Fogo Box</h1>
-            <h2 class="product-subtitle">Entrega mensal de um molho picante + cartão explicativo.</h2>
+            <h1 class="product-title">Fogo Box</h1>
+            <p class="product-attribution">pel'O Homem que Comia Tudo</p>
+            <div class="corebox-seal">Selecionada pela <strong>CoreBox</strong></div>
+            <h2 class="product-subtitle">Entrega mensal de dois molhos picantes + cartão explicativo.</h2>
 
             <div class="purchase-action">
                 <div class="price-box">
                     <span class="price-label">SUBSCRIÇÃO MENSAL</span>
-                    <span class="price-value">€14</span>
+                    <span class="price-value">€20</span>
                     <span class="price-shipping">(inclui transporte)</span>
                 </div>
                 <div class="subscription-container">
@@ -87,17 +89,18 @@
         </section>
 
         <div class="product-description">
-            <p>A caixa de subscrição oficial do Homem que Comia Tudo. Consiste numa entrega recorrente de uma box
-                com um molho picante “verdadeiro”. Este molho vem com um bilhete de identidade - lista os
-                ingredientes, nível de intensidade, combinações sugeridas, ciência culinária, e outros fun facts
-                relacionados com o frasco.</p>
+            <p>Esta subscrição consiste numa entrega recorrente de uma box
+                com dois molhos picantes “verdadeiros”. Estes molhos vem com um bilhete de identidade - lista os
+                ingredientes, a receita, o nível de intensidade, combinações sugeridas, ciência culinária, e outros fun
+                facts
+                relacionados com os frascos.</p>
 
             <blockquote>
-                “Context and memory play powerful roles in all the truly great meals in one’s life.” -
+                “Context and memory play powerful roles in all the truly great meals in one’s life.” <br> -
                 <strong>Anthony Bourdain</strong>
             </blockquote>
 
-            <h3>Porque é que o picante d’O Homem que Comia Tudo é melhor que o do supermercado?</h3>
+            <h3>Porque é que os picantes d’O Homem que Comia Tudo são melhores que os do supermercado?</h3>
 
             <ol>
                 <li>Eles vêm ter contigo.</li>
@@ -112,6 +115,11 @@
 
     </main>
 
+    <!-- FogoBox Contact -->
+    <div class="fogobox-contact">
+        <p><a href="mailto:fogobox.ohqct@gmail.com">fogobox.ohqct@gmail.com</a></p>
+    </div>
+
     <div id="auth-modal" class="modal-overlay" style="display: none;">
         <div class="modal-box">
             <button class="close-modal" id="close-modal">&times;</button>
@@ -125,10 +133,20 @@
         </div>
     </div>
 
-    <footer class="site-footer">
-        <nav class="footer-nav">
-            <a href="mailto:fogobox.ohqct@gmail.com">fogobox.ohqct@gmail.com</a>
-        </nav>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-brand">
+                <p class="footer-logo"><a href="homepage.html"
+                        style="text-decoration: none; color: inherit;">CoreBox</a></p>
+                <p class="footer-tagline">Marketplace de caixas de subscrição</p>
+            </div>
+            <nav class="footer-nav">
+                <a href="homepage.html"
+                    style="font-weight: 700; color: #1a1a1a; text-decoration: none; border-bottom: 2px solid #E53935;">Saber
+                    mais sobre esta startup &rarr;</a>
+            </nav>
+        </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>

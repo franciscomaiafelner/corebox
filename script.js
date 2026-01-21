@@ -128,7 +128,7 @@ subscribeBtn.addEventListener('click', async () => {
         subscribeBtn.innerText = "OPENING PORTAL...";
         await callEdgeFunction('portal', { returnUrl: window.location.origin });
         subscribeBtn.disabled = false;
-        subscribeBtn.innerText = "MANAGE SUBSCRIPTION";
+        subscribeBtn.innerText = "GERIR SUBSCRIÇÃO";
     } else {
         // Se não é assinante -> Checkout
         subscribeBtn.disabled = true;
@@ -206,7 +206,7 @@ async function updateSubscriptionUI(session) {
         await checkSubscriptionStatus(session.user);
 
         if (isSubscriber) {
-            subscribeBtn.innerText = "MANAGE SUBSCRIPTION";
+            subscribeBtn.innerText = "GERIR SUBSCRIÇÃO";
         } else {
             subscribeBtn.innerText = "SUBSCREVER";
         }

@@ -33,6 +33,19 @@ body {
     overflow-x: hidden;
 }
 
+/* Container utility */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+@media (min-width: 768px) {
+    .container {
+        padding: 0 48px;
+    }
+}
+
 /* Header / Warning Tape */
 .site-header {
     width: 100%;
@@ -78,13 +91,7 @@ body {
     gap: var(--spacing-lg);
 }
 
-@media (min-width: 768px) {
-    .product-container {
-        /* On desktop, keep it centered but maybe a single column flow is better for this specific wireframe?
-           The wireframe shows carousel centered above, details below. 
-           Let's stick to the wireframe layout. */
-    }
-}
+
 
 /* Carousel */
 .carousel-section {
@@ -161,10 +168,15 @@ body {
 }
 
 .carousel-nav {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     justify-content: center;
-    padding: 10px 0;
     gap: 10px;
+    z-index: 2;
+    padding: 0;
 }
 
 .carousel-indicator {
@@ -174,6 +186,8 @@ body {
     height: 10px;
     background: white;
     cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.3s;
 }
 
 .carousel-indicator.current-slide {
@@ -196,6 +210,31 @@ body {
     margin-bottom: 0.5rem;
     text-transform: uppercase;
     letter-spacing: 2px;
+}
+
+.product-attribution {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    line-height: 1;
+    color: var(--color-accent);
+    margin-top: -0.5rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.corebox-seal {
+    display: inline-block;
+    font-size: 0.75rem;
+    color: #444;
+    border: 1px solid #aaa;
+    padding: 0.2rem 0.6rem;
+    margin-bottom: 0.75rem;
+    border-radius: 20px;
+    font-family: var(--font-body);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    background-color: transparent;
 }
 
 .product-subtitle {
@@ -312,27 +351,90 @@ body {
     margin-bottom: 0.5rem;
 }
 
-/* Footer */
-.site-footer {
-    border-top: 3px solid black;
+/* FogoBox Contact Section */
+.fogobox-contact {
     padding: var(--spacing-md) 0;
     text-align: center;
-    background: white;
+    border-top: 1px solid #ccc;
     margin-top: var(--spacing-lg);
 }
 
-.footer-nav a {
-    color: black;
+.fogobox-contact p {
+    margin: 0;
+}
+
+.fogobox-contact a {
+    color: #666;
     text-decoration: none;
-    font-weight: 700;
-    text-transform: uppercase;
-    margin: 0 1rem;
     font-size: 0.9rem;
-    letter-spacing: 1px;
+    transition: color 0.2s;
+}
+
+.fogobox-contact a:hover {
+    color: #1a1a1a;
+    text-decoration: underline;
+}
+
+/* Footer - CoreBox Style */
+.footer {
+    padding: 60px 0 40px;
+    border-top: 1px solid #e5e5e5;
+    background-color: #ffffff;
+}
+
+.footer .container {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.footer-brand {
+    text-align: center;
+}
+
+.footer-logo {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.footer-tagline {
+    font-size: 14px;
+    color: #666666;
+}
+
+.footer-nav {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.footer-nav a {
+    font-size: 14px;
+    color: #666666;
+    transition: color 0.2s ease;
+    text-decoration: none;
+    text-transform: none;
+    letter-spacing: normal;
+    font-weight: 400;
+    margin: 0;
 }
 
 .footer-nav a:hover {
-    text-decoration: underline;
+    color: #1a1a1a;
+}
+
+@media (min-width: 768px) {
+    .footer .container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .footer-brand {
+        text-align: left;
+    }
 }
 
 /* Responsive Tweaks */
@@ -517,13 +619,31 @@ body {
         display: grid;
         grid-template-columns: 1.1fr 0.9fr;
         gap: var(--spacing-lg);
-        align-items: start;
+        align-items: stretch;
     }
 
     .carousel-section {
         margin: 0;
         width: 100%;
         max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .carousel-track-container {
+        flex-grow: 1;
+        width: 100%;
+        position: relative;
+        aspect-ratio: auto;
+    }
+
+    .carousel-track {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
     }
 
     .product-details {
