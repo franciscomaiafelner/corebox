@@ -46,39 +46,35 @@ body {
     }
 }
 
-/* Header / Warning Tape */
+/* Header - Minimal Style */
 .site-header {
     width: 100%;
-    background-color: var(--color-bg);
-    border-bottom: 3px solid var(--color-border);
-    overflow: hidden;
-    padding: 10px 0;
-    /* Diagonal hatch pattern background for a "rough" look */
-    background-image: repeating-linear-gradient(45deg,
-            #f0f0f0,
-            #f0f0f0 10px,
-            #ffffff 10px,
-            #ffffff 20px);
+    background-color: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 1.5rem 0;
+}
+
+.header-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .warning-tape {
-    background-color: var(--color-tape);
-    color: black;
-    font-family: var(--font-heading);
-    font-size: 1.5rem;
-    padding: 0.5rem 0;
-    white-space: nowrap;
-    border-top: 2px solid black;
-    border-bottom: 2px solid black;
-    transform: rotate(-1deg) scale(1.05);
-    /* Slight tilt for chaos/artisan vibe */
-    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
-    display: flex;
-    justify-content: center;
-    /* Center the text */
-    gap: 2rem;
-    overflow: hidden;
-    /* Ensure no scrollbar */
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: #666;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+.warning-tape .separator {
+    padding: 0 0.8rem;
+    opacity: 0.5;
 }
 
 /* Main Layout */
@@ -186,8 +182,6 @@ body {
     height: 10px;
     background: white;
     cursor: pointer;
-    opacity: 0.6;
-    transition: opacity 0.3s;
 }
 
 .carousel-indicator.current-slide {
@@ -375,65 +369,86 @@ body {
     text-decoration: underline;
 }
 
-/* Footer - CoreBox Style */
-.footer {
-    padding: 60px 0 40px;
-    border-top: 1px solid #e5e5e5;
-    background-color: #ffffff;
+/* Contact Section - End of Main */
+.contact-section {
+    text-align: center;
+    padding-top: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+    border-top: 1px solid #ddd;
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.footer .container {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
+.contact-section a {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: #666;
+    text-decoration: none;
+    transition: color 0.2s ease;
 }
 
-.footer-brand {
+.contact-section a:hover {
+    color: var(--color-text);
+    text-decoration: underline;
+}
+
+/* Footer - Product Page Style */
+.site-footer {
+    background-color: var(--color-bg);
+    border-top: 3px solid var(--color-border);
+    padding: var(--spacing-lg) var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+.corebox-promo {
     text-align: center;
 }
 
-.footer-logo {
-    font-size: 18px;
+.corebox-promo p {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 0.5rem;
+}
+
+.corebox-promo p:last-of-type {
+    margin-bottom: 1.5rem;
+}
+
+.corebox-promo strong {
+    font-weight: 700;
+    color: var(--color-text);
+}
+
+.corebox-link {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
     font-weight: 500;
-    margin-bottom: 8px;
-}
-
-.footer-tagline {
-    font-size: 14px;
-    color: #666666;
-}
-
-.footer-nav {
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    flex-wrap: wrap;
-}
-
-.footer-nav a {
-    font-size: 14px;
-    color: #666666;
-    transition: color 0.2s ease;
+    color: var(--color-accent);
     text-decoration: none;
-    text-transform: none;
-    letter-spacing: normal;
-    font-weight: 400;
-    margin: 0;
+    transition: all 0.2s ease;
+    border-bottom: 2px solid transparent;
 }
 
-.footer-nav a:hover {
-    color: #1a1a1a;
+.corebox-link:hover {
+    color: var(--color-text);
+    border-bottom-color: var(--color-text);
+    transform: translateX(4px);
 }
+
+
 
 @media (min-width: 768px) {
-    .footer .container {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
+    .site-footer {
+        padding: var(--spacing-lg) var(--spacing-lg);
     }
 
-    .footer-brand {
-        text-align: left;
+    .corebox-promo {
+        max-width: 600px;
+        margin: 0 auto;
     }
 }
 
@@ -459,30 +474,9 @@ body {
     .carousel-btn.next {
         right: -10px;
     }
-
-    .warning-tape {
-        font-size: 1.2rem;
-    }
 }
 
 /* Auth & Modal Styles */
-.header-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-.warning-tape {
-    flex-grow: 1;
-    /* Center text within the tape strip itself */
-    display: flex;
-    justify-content: center;
-}
-
 .sign-out-btn {
     background: transparent;
     border: 2px solid #555;
@@ -657,6 +651,12 @@ body {
         max-width: 800px;
         margin: var(--spacing-md) auto 0;
         /* Reduced top margin */
+        width: 100%;
+    }
+
+    .contact-section {
+        grid-column: 1 / -1;
+        max-width: 100%;
         width: 100%;
     }
 
