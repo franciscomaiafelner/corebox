@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fogo Box - Caixa de Subscrição d'O Homem que Comia Tudo</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/fogo-box.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -16,9 +16,7 @@
 <body>
 
     <header class="topbar">
-        <a href="homepage.html" class="topbar-logo"><strong>CoreBox</strong> Portugal</a>
-        <p class="topbar-tagline">A CoreBox coloca o modelo de subscrição de produtos nas mãos dos criadores
-            portugueses.</p>
+        <a href="/" class="topbar-logo"><strong>CoreBox</strong> Portugal</a>
         <button class="topbar-login-btn" id="topbar-login-btn">Iniciar sessão</button>
     </header>
 
@@ -35,13 +33,13 @@
             <div class="carousel-track-container">
                 <ul class="carousel-track">
                     <li class="carousel-slide current-slide">
-                        <img src="box%20photos/1.jpeg" alt="Fogo Box Imagem 1">
+                        <img src="../assets/box-photos/1.jpeg" alt="Fogo Box Imagem 1">
                     </li>
                     <li class="carousel-slide">
-                        <img src="box%20photos/2.jpeg" alt="Fogo Box Imagem 2">
+                        <img src="../assets/box-photos/2.jpeg" alt="Fogo Box Imagem 2">
                     </li>
                     <li class="carousel-slide">
-                        <img src="box%20photos/3.jpeg" alt="Fogo Box Imagem 3">
+                        <img src="../assets/box-photos/3.jpeg" alt="Fogo Box Imagem 3">
                     </li>
                 </ul>
             </div>
@@ -93,12 +91,12 @@
                 intensidade do picante e fun facts relacionados com a produção dos frascos.</p>
 
             <blockquote>
-                “Um jantar com comida picante põem-nos bem dispostos, faz o coração bater mais depressa. A malagueta é a
-                anfetamina da culinária.” <br> -
+                "Um jantar com comida picante põem-nos bem dispostos, faz o coração bater mais depressa. A malagueta é a
+                anfetamina da culinária." <br> -
                 <strong>O Homem que Comia Tudo</strong>
             </blockquote>
 
-            <h3>Porque é que o picantes d’O Homem que Comia Tudo são melhores que os do supermercado?</h3>
+            <h3>Porque é que o picantes d'O Homem que Comia Tudo são melhores que os do supermercado?</h3>
 
             <ol>
                 <li>São deliciosos.</li>
@@ -133,15 +131,17 @@
 
     <footer class="site-footer">
         <div class="corebox-promo">
-            <p>Esta caixa faz parte da coleção inicial da <strong>CoreBox</strong>. Marketplace de caixas de subscrição.
-                <a href="homepage.html" class="corebox-link">Saber mais sobre a CoreBox &rarr;</a></p>
+            <p>Esta caixa faz parte da coleção inicial da CoreBox.
+            </p>
+            <a href="/" class="corebox-link">Saber mais sobre a CoreBox &rarr;</a>
+
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="config.js"></script>
-    <script src="script.js"></script>
-    <script src="topbar-auth.js"></script>
+    <script src="../js/config.js"></script>
+    <script src="../js/fogo-box.js"></script>
+    <script src="../js/topbar-auth.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/pages/homepage.html" },
+    { "source": "/fogo-box", "destination": "/pages/fogo-box.html" }
+  ]
+}

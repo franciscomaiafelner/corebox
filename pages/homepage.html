@@ -6,23 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CoreBox — Marketplace de caixas de subscrição</title>
     <meta name="description" content="Descobre e gere experiências de subscrição num só lugar.">
-    <link rel="stylesheet" href="homepage.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../css/homepage.css">
+    <link rel="stylesheet" href="../css/fogo-box.css">
 </head>
 
 <body>
 
     <!-- Header -->
     <header class="topbar">
-        <a href="homepage.html" class="topbar-logo"><strong>CoreBox</strong> Portugal</a>
-        <p class="topbar-tagline">A CoreBox coloca o modelo de subscrição de produtos nas mãos dos criadores
-            portugueses.</p>
+        <a href="/" class="topbar-logo"><strong>CoreBox</strong> Portugal</a>
         <button class="topbar-login-btn" id="topbar-login-btn">Iniciar sessão</button>
     </header>
 
     <!-- Site Logo -->
     <div class="site-logo-section">
-        <a href="homepage.html" class="site-logo-link"><strong>CoreBox</strong> Portugal</a>
+        <p class="site-logo-link"><strong>CoreBox</strong> Portugal</p>
     </div>
 
     <!-- Hero Section -->
@@ -31,7 +29,7 @@
         <p>A CoreBox é uma startup lisboeta que adapta o modelo de subscrição, consagrado
             na Europa e nos EUA, para valorizar produtos portugueses.
             Ao pedir a sua primeira caixa vai descobrir o que torna este modelo tão adorado lá fora, enquanto apoia
-            diretamente um criador português.
+            diretamente um criador local.
         </p>
 
         <p><a href="#boxes">Ver as nossas caixas ↓</a></p>
@@ -57,9 +55,9 @@
                     <h3>Fogo Box</h3>
                     <p class="box-creator">pel'O Homem que Comia Tudo</p>
                     <p>Entrega mensal de dois molhos picantes verdadeiros.</p>
-                    <p><a href="index.html">Ver caixa →</a></p>
+                    <p><a href="/fogo-box">Ver caixa →</a></p>
                 </div>
-                <img src="box photos/1.jpeg" alt="Fogo Box" class="box-item-photo">
+                <img src="../assets/box-photos/1.jpeg" alt="Fogo Box" class="box-item-photo">
             </div>
 
             <div class="box-item">
@@ -93,9 +91,9 @@
         <p>Pode encontrar e gerir as suas caixas de subscrição num único painel intuitivo. Com a CoreBox, poderá
             visualizar, gerir e alterar várias subscrições em simultâneo.</p>
         <ul>
-            <li>Painel centralizado para monitorar as suas subscrições</li>
-            <li>Controlo sobre o estado de cada subscrição (pausar, cancelar, alterar plano, etc.)</li>
-            <li>Histórico e previsão de entregas com notificações integradas</li>
+            <li>Painel centralizado para monitorar as suas subscrições.</li>
+            <li>Controlo sobre o estado de cada subscrição (pausar, cancelar, alterar plano, etc.).</li>
+            <li>Histórico e previsão de entregas com notificações integradas.</li>
         </ul>
 
         <h3>Segurança e confiança</h3>
@@ -110,7 +108,7 @@
         <ul>
             <li><strong>Pagamentos Seguros:</strong> Transações protegidas pela nossa infraestrutura.</li>
             <li><strong>Seleção da Oferta:</strong> Filtros sobre a entrada de produtores na plataforma.</li>
-            <li><strong>Fiabilidade Logística:</strong> Zero preocupações com atrasos ou pagamentos.</li>
+            <li><strong>Fiabilidade Logística:</strong> Menos atrasos e acompanhamento da encomenda.</li>
             <li><strong>Suporte:</strong> Gestão transparente de feedback e apoio ao cliente sempre disponível.</li>
         </ul>
     </section>
@@ -129,14 +127,13 @@
 
     <!-- Manifesto Section -->
     <section class="section">
-        <p><em>Não vendemos produtos.<br>
-                Vendemos surpresa, autoria e continuidade.</em></p>
+        <p><em>Vendemos surpresa, autoria e continuidade.</em></p>
     </section>
 
     <!-- Footer -->
     <footer class="section footer">
         <p><strong>CoreBox</strong></p>
-        <p>Marketplace de caixas de subscrição</p>
+        <p>uma ideia para um marketplace de caixas de subscrição</p>
     </footer>
 
     <!-- Auth Modal -->
@@ -154,9 +151,9 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="config.js"></script>
-    <script src="homepage.js"></script>
-    <script src="topbar-auth.js"></script>
+    <script src="../js/config.js"></script>
+    <script src="../js/homepage.js"></script>
+    <script src="../js/topbar-auth.js"></script>
 </body>
 
 </html>

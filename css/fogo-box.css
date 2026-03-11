@@ -475,7 +475,7 @@ body {
     font-family: var(--font-body);
     font-size: 0.95rem;
     font-weight: 500;
-    color: var(--color-accent);
+    color: var(--color-border);
     text-decoration: none;
     transition: all 0.2s ease;
     border-bottom: 2px solid transparent;
