@@ -7,230 +7,156 @@
     <title>CoreBox — Marketplace de caixas de subscrição</title>
     <meta name="description" content="Descobre e gere experiências de subscrição num só lugar.">
     <link rel="stylesheet" href="homepage.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
     <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <a href="#" class="logo-link">
-                <img src="photos/logo.png" alt="CoreBox" class="logo">
-            </a>
-        </div>
+    <header class="topbar">
+        <a href="homepage.html" class="topbar-logo"><strong>CoreBox</strong> Portugal</a>
+        <p class="topbar-tagline">A CoreBox coloca o modelo de subscrição de produtos nas mãos dos criadores
+            portugueses.</p>
+        <button class="topbar-login-btn" id="topbar-login-btn">Iniciar sessão</button>
     </header>
 
+    <!-- Site Logo -->
+    <div class="site-logo-section">
+        <a href="homepage.html" class="site-logo-link"><strong>CoreBox</strong> Portugal</a>
+    </div>
+
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1 class="hero-headline">O melhor da produção independente. Entregue à porta.</h1>
-            <p class="hero-subheadline">A CoreBox é uma startup lisboeta que adapta o modelo de subscrição, consagrado
-                na Europa e nos EUA, para valorizar o que é nosso. Descubra, experimente e apoie os produtores locais.
-            </p>
-            <a href="#boxes" class="btn btn-primary">Ver as nossas caixas</a>
-        </div>
+    <section class="section">
+        <h1>Estimular a produção independente através de modelo de subscrição de produtos.</h1>
+        <p>A CoreBox é uma startup lisboeta que adapta o modelo de subscrição, consagrado
+            na Europa e nos EUA, para valorizar produtos portugueses.
+            Ao pedir a sua primeira caixa vai descobrir o que torna este modelo tão adorado lá fora, enquanto apoia
+            diretamente um criador português.
+        </p>
+
+        <p><a href="#boxes">Ver as nossas caixas ↓</a></p>
     </section>
 
     <!-- What Is Section -->
-    <section class="what-is">
-        <div class="container">
-            <h2 class="section-title what-is-title">O que é uma caixa de subscrição?</h2>
-            <div class="what-is-content">
-                <div class="what-is-image-placeholder">
-                    <!-- Placeholder for illustration -->
-                    <div class="placeholder-icon">📦</div>
-                    <p class="placeholder-text">Ilustração de caixa de subscrição</p>
-                </div>
-                <p class="what-is-text">
-                    O modelo subscrição é um serviço que entrega caixas de produtos selecionados de forma recorrente -
-                    alguns exemplos são: cafés artesanais, cosméticos naturais, snacks saudáveis ou até produtos de
-                    nicho,
-                    como especiarias raras. Todos os meses, os consumidores recebem uma nova caixa, montada com atenção
-                    a
-                    cada detalhe, que alia a conveniência da entrega ao domicílio a uma experiência de descoberta
-                    memorável.
-                </p>
-            </div>
-        </div>
+    <section class="section">
+        <h2>O que é uma caixa de subscrição?</h2>
+        <p>O modelo subscrição é um serviço que entrega caixas de produtos selecionados de forma recorrente —
+            alguns exemplos são: cafés artesanais, cosméticos naturais, snacks saudáveis ou até produtos de
+            nicho, como especiarias raras. Todos os meses, os consumidores recebem uma nova caixa, montada com atenção
+            a cada detalhe, que alia a conveniência da entrega ao domicílio a uma experiência de descoberta memorável.
+        </p>
     </section>
 
     <!-- Initial Collection Section -->
-    <section class="collection" id="boxes">
-        <div class="container">
-            <p class="collection-intro">A CoreBox começa com uma coleção inicial de caixas independentes.</p>
+    <section class="section" id="boxes">
+        <p>A CoreBox começa com uma coleção inicial de caixas independentes:</p>
 
-            <div class="carousel">
-                <button class="carousel-btn prev-btn">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="15 18 9 12 15 6"></polyline>
-                    </svg>
-                </button>
-
-                <div class="carousel-track-container">
-                    <ul class="carousel-track">
-                        <!-- Fogo Box -->
-                        <li class="carousel-slide current-slide">
-                            <article class="box-card">
-                                <div class="box-card-image box-image-fogo"></div>
-                                <div class="box-card-content">
-                                    <h3 class="box-card-title">Fogo Box</h3>
-                                    <p class="box-card-creator">pel'O Homem que Comia Tudo</p>
-                                    <p class="box-card-description">Entrega mensal de dois molhos picantes verdadeiros.
-                                    </p>
-                                    <a href="index.html" class="box-card-link">Ver caixa</a>
-                                </div>
-                            </article>
-                        </li>
-
-                        <!-- Wine Box -->
-                        <li class="carousel-slide">
-                            <article class="box-card">
-                                <div class="box-card-image box-image-wine"></div>
-                                <div class="box-card-content">
-                                    <h3 class="box-card-title">Vinha Select</h3>
-                                    <p class="box-card-creator">por Sommeliers Independentes</p>
-                                    <p class="box-card-description">Uma caixa de subscrição de vinhos.</p>
-                                    <p class="box-card-status">Em breve</p>
-                                </div>
-                            </article>
-                        </li>
-
-                        <!-- Coffee Box -->
-                        <li class="carousel-slide">
-                            <article class="box-card">
-                                <div class="box-card-image box-image-coffee"></div>
-                                <div class="box-card-content">
-                                    <h3 class="box-card-title">Café de Especialidade</h3>
-                                    <p class="box-card-creator">por Roasters Locais</p>
-                                    <p class="box-card-description">Uma caixa de subscrição de café de especialidade.
-                                    </p>
-                                    <p class="box-card-status">Em breve</p>
-                                </div>
-                            </article>
-                        </li>
-
-                        <!-- Crochet Box -->
-                        <li class="carousel-slide">
-                            <article class="box-card">
-                                <div class="box-card-image box-image-crochet"></div>
-                                <div class="box-card-content">
-                                    <h3 class="box-card-title">Crochet Club</h3>
-                                    <p class="box-card-creator">por Artesãos Têxteis</p>
-                                    <p class="box-card-description">Uma caixa de subscrição de crochet.</p>
-                                    <p class="box-card-status">Em breve</p>
-                                </div>
-                            </article>
-                        </li>
-                    </ul>
+        <div class="box-list">
+            <div class="box-item box-item-with-image">
+                <div class="box-item-text">
+                    <h3>Fogo Box</h3>
+                    <p class="box-creator">pel'O Homem que Comia Tudo</p>
+                    <p>Entrega mensal de dois molhos picantes verdadeiros.</p>
+                    <p><a href="index.html">Ver caixa →</a></p>
                 </div>
+                <img src="box photos/1.jpeg" alt="Fogo Box" class="box-item-photo">
+            </div>
 
-                <button class="carousel-btn next-btn">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <polyline points="9 18 15 12 9 6"></polyline>
-                    </svg>
-                </button>
+            <div class="box-item">
+                <h3>Vinha Select</h3>
+                <p class="box-creator">por Sommeliers Independentes</p>
+                <p>Uma caixa de subscrição de vinhos.</p>
+                <p class="box-status">Em breve</p>
+            </div>
+
+            <div class="box-item">
+                <h3>Café de Especialidade</h3>
+                <p class="box-creator">por Roasters Locais</p>
+                <p>Uma caixa de subscrição de café de especialidade.</p>
+                <p class="box-status">Em breve</p>
+            </div>
+
+            <div class="box-item">
+                <h3>Crochet Club</h3>
+                <p class="box-creator">por Artesãos Têxteis</p>
+                <p>Uma caixa de subscrição de crochet.</p>
+                <p class="box-status">Em breve</p>
             </div>
         </div>
     </section>
 
     <!-- For Consumers Section -->
-    <section class="for-consumers">
-        <div class="container">
-            <h2 class="section-title">Para consumidores</h2>
+    <section class="section">
+        <h2>Qual é o papel da CoreBox?</h2>
 
-            <!-- Infrastructure Subsection -->
-            <div class="consumer-subsection infrastructure-subsection">
-                <div class="subsection-content">
-                    <h3 class="subsection-heading">Gestão centralizada das suas subscrições</h3>
-                    <p class="subsection-text">
-                        Imagine ter todas as suas caixas de subscrição num único painel. Com a CoreBox, poderá
-                        visualizar,
-                        gerir e controlar múltiplas subscrições em simultâneo — tudo num só lugar.
-                    </p>
-                    <ul class="feature-list">
-                        <li>Painel centralizado para todas as suas subscrições</li>
-                        <li>Controlo total sobre renovações e pausas</li>
-                        <li>Histórico completo de entregas</li>
-                        <li>Notificações personalizadas</li>
-                    </ul>
-                    <p class="coming-soon-note">💡 Funcionalidade em desenvolvimento</p>
-                </div>
-                <div class="subsection-visual">
-                    <div class="mockup-placeholder">
-                        <div class="placeholder-icon">🖥️</div>
-                        <p class="placeholder-text">Mockup do painel de gestão</p>
-                    </div>
-                </div>
-            </div>
+        <h3>Gestão centralizada das suas subscrições</h3>
+        <p>Pode encontrar e gerir as suas caixas de subscrição num único painel intuitivo. Com a CoreBox, poderá
+            visualizar, gerir e alterar várias subscrições em simultâneo.</p>
+        <ul>
+            <li>Painel centralizado para monitorar as suas subscrições</li>
+            <li>Controlo sobre o estado de cada subscrição (pausar, cancelar, alterar plano, etc.)</li>
+            <li>Histórico e previsão de entregas com notificações integradas</li>
+        </ul>
 
-            <!-- Security & Trust Subsection -->
-            <div class="consumer-subsection security-subsection">
-                <div class="subsection-content">
-                    <h3 class="subsection-heading">Segurança e confiança</h3>
-                    <p class="subsection-text">
-                        Unimos a autenticidade de pequenos criadores à infraestrutura e segurança de uma marca de
-                        referência.
-                    </p>
-                    <ul class="feature-list">
-                        <li><strong>Seleção da Oferta:</strong> Acesso privilegiado a produtores com identidade.</li>
-                        <li><strong>Fiabilidade Logística:</strong> Zero preocupações com atrasos ou pagamentos.</li>
-                        <li><strong>Suporte:</strong> Gestão transparente de feedback e apoio ao cliente sempre
-                            disponível.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+        <h3>Segurança e confiança</h3>
+        <p>Os pequenos negócios criam produtos com alma e atenção ao detalhe, mas frequentemente debatem-se com desafios
+            de logística, segurança de pagamentos e suporte ao cliente. Em contraste, as grandes corporações dominam a
+            eficiência, mas
+            perdem o fator humano na busca constante pela margem de lucro. A CoreBox é a ponte entre estes dois
+            universos.
+        </p>
+        <p>O nosso objetivo é unir a autenticidade de pequenos criadores à infraestrutura e segurança de uma marca de
+            referência.</p>
+        <ul>
+            <li><strong>Pagamentos Seguros:</strong> Transações protegidas pela nossa infraestrutura.</li>
+            <li><strong>Seleção da Oferta:</strong> Filtros sobre a entrada de produtores na plataforma.</li>
+            <li><strong>Fiabilidade Logística:</strong> Zero preocupações com atrasos ou pagamentos.</li>
+            <li><strong>Suporte:</strong> Gestão transparente de feedback e apoio ao cliente sempre disponível.</li>
+        </ul>
     </section>
 
     <!-- For Creators Section -->
-    <section class="for-creators">
-        <div class="container">
-            <h2 class="section-title">Para criadores</h2>
-            <p class="section-intro">A CoreBox nasce para dar palco a criadores independentes, removendo fricção
-                logística e permitindo foco total na experiência:</p>
-            <ul class="feature-list">
-                <li><strong>E-commerce para subscrições:</strong> Plataforma completa para gerir o seu
-                    negócio.</li>
-                <li><strong>Visibilidade de marketplace:</strong> Alcance novos clientes através da nossa rede.</li>
-                <li><strong>Apoio na criação:</strong> Suporte dedicado para criar experiências de excelência.
-                </li>
-            </ul>
-            <button class="btn btn-secondary" disabled>Candidatar-se (brevemente)</button>
-        </div>
+    <section class="section">
+        <h2>Para criadores</h2>
+        <p>A CoreBox nasce para dar palco a criadores independentes, removendo fricção
+            logística e permitindo foco total na experiência:</p>
+        <ul>
+            <li><strong>E-commerce para subscrições:</strong> Plataforma completa para gerir o seu negócio.</li>
+            <li><strong>Visibilidade de marketplace:</strong> Alcance novos clientes através da nossa rede.</li>
+            <li><strong>Apoio na criação:</strong> Suporte dedicado para criar experiências de excelência.</li>
+        </ul>
     </section>
 
     <!-- Manifesto Section -->
-    <section class="manifesto">
-        <div class="container">
-            <p class="manifesto-text">
-                Não vendemos produtos.<br>
-                Vendemos surpresa, autoria e continuidade.
-            </p>
-        </div>
-    </section>
-
-    <!-- Final CTA Section -->
-    <section class="final-cta">
-        <div class="container">
-        </div>
+    <section class="section">
+        <p><em>Não vendemos produtos.<br>
+                Vendemos surpresa, autoria e continuidade.</em></p>
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-brand">
-                <p class="footer-logo">CoreBox</p>
-                <p class="footer-tagline">Marketplace de caixas de subscrição</p>
-            </div>
-        </div>
+    <footer class="section footer">
+        <p><strong>CoreBox</strong></p>
+        <p>Marketplace de caixas de subscrição</p>
     </footer>
 
+    <!-- Auth Modal -->
+    <div id="auth-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-box">
+            <button class="close-modal" id="close-modal">&times;</button>
+            <h2>ENTRAR NA COREBOX</h2>
+            <p>Enviaremos um link de acesso para o teu email.</p>
+            <form id="auth-form">
+                <input type="email" id="email" placeholder="O teu email" required>
+                <button type="submit">ENVIAR LINK</button>
+            </form>
+            <div id="auth-message"></div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
     <script src="homepage.js"></script>
+    <script src="topbar-auth.js"></script>
 </body>
 
 </html>

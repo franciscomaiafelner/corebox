@@ -208,11 +208,11 @@ async function updateSubscriptionUI(session) {
         if (isSubscriber) {
             subscribeBtn.innerText = "GERIR SUBSCRIÇÃO";
         } else {
-            subscribeBtn.innerText = "COMEÇAR A RECEBER";
+            subscribeBtn.innerText = "ENTRAR E COMEÇAR A RECEBER";
         }
     } else {
         isSubscriber = false;
-        subscribeBtn.innerText = "COMEÇAR A RECEBER";
+        subscribeBtn.innerText = "ENTRAR E COMEÇAR A RECEBER";
         userEmailDisplay.innerText = "";
         if (signOutBtn) signOutBtn.style.display = 'none';
         if (userStatusRow) userStatusRow.style.display = 'none';
