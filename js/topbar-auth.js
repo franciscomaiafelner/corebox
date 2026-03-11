@@ -50,7 +50,7 @@
             const { error } = await client.auth.signInWithOtp({
                 email: email,
                 options: {
-                    emailRedirectTo: window.location.origin
+                    emailRedirectTo: 'https://coreboxportugal.com/fogo-box'
                 }
             });
 
