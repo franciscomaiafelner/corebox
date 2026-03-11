@@ -119,7 +119,50 @@ body {
     border-color: #555;
 }
 
+/* Topbar — user info when logged in */
+.topbar-user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+}
+
+.topbar-user-email {
+    font-family: var(--font-body, 'Roboto', sans-serif);
+    font-size: 0.75rem;
+    color: #555;
+    white-space: nowrap;
+}
+
+.topbar-user-email strong {
+    color: var(--color-text, #1a1a1a);
+    font-weight: 600;
+}
+
+.topbar-signout-btn {
+    font-family: var(--font-body, 'Roboto', sans-serif);
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--color-text, #1a1a1a);
+    background: transparent;
+    border: 1.5px solid var(--color-text, #1a1a1a);
+    padding: 0.4rem 1rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+    letter-spacing: 0.3px;
+}
+
+.topbar-signout-btn:hover {
+    background: var(--color-text, #1a1a1a);
+    color: var(--color-bg, #F9F7F2);
+}
+
 @media (max-width: 600px) {
+    .topbar-user-email {
+        display: none;
+    }
+
     .topbar-tagline {
         display: none;
     }
@@ -128,6 +171,8 @@ body {
         padding: 0.7rem 1rem;
     }
 }
+
+
 
 /* Main Layout */
 .product-container {
@@ -346,6 +391,23 @@ body {
     transition: transform 0.1s, box-shadow 0.1s;
     /* Hard shadow */
     box-shadow: 4px 4px 0px black;
+    /* Layout for email sub-label */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.1rem;
+}
+
+/* Email sub-label inside subscribe button */
+.subscribe-btn-email {
+    display: block;
+    font-family: var(--font-body, 'Roboto', sans-serif);
+    font-size: 0.65rem;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    opacity: 0.8;
+    text-transform: none;
 }
 
 .subscribe-btn:hover {

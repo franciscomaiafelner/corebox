@@ -122,20 +122,21 @@ subscribeBtn.addEventListener('click', async () => {
     }
 
     // Se já tem sessão, decide qual função chamar
+    const { data: { session: currentSession } } = await supabaseClient.auth.getSession();
     if (isSubscriber) {
         // Se é assinante -> Portal
         subscribeBtn.disabled = true;
-        subscribeBtn.innerText = "OPENING PORTAL...";
+        subscribeBtn.innerHTML = "A ABRIR PORTAL...";
         await callEdgeFunction('portal', { returnUrl: window.location.origin });
         subscribeBtn.disabled = false;
-        subscribeBtn.innerText = "GERIR SUBSCRIÇÃO";
+        subscribeBtn.innerHTML = `GERIR SUBSCRIÇÃO<span class="subscribe-btn-email">${currentSession?.user?.email || ''}</span>`;
     } else {
         // Se não é assinante -> Checkout
         subscribeBtn.disabled = true;
-        subscribeBtn.innerText = "REDIRECTING...";
+        subscribeBtn.innerHTML = "A REDIRECIONAR...";
         await callEdgeFunction('checkout'); // Preço hardcoded no backend
         subscribeBtn.disabled = false;
-        subscribeBtn.innerText = "SUBSCRIBE NOW";
+        subscribeBtn.innerHTML = `COMEÇAR A RECEBER<span class="subscribe-btn-email">${currentSession?.user?.email || ''}</span>`;
     }
 });
 
@@ -194,28 +195,23 @@ async function checkSubscriptionStatus(user) {
 }
 
 const userStatusRow = document.querySelector('.user-status-row');
+// Ocultar sempre a user-status-row (email + logout abaixo do botão)
+if (userStatusRow) userStatusRow.style.display = 'none';
 
 // Atualizar UI
 async function updateSubscriptionUI(session) {
     if (session) {
-        userEmailDisplay.innerText = `Logged in as: ${session.user.email}`;
-        if (signOutBtn) signOutBtn.style.display = 'block';
-        if (userStatusRow) userStatusRow.style.display = 'flex';
-
         // Verificar status na DB antes de atualizar botão
         await checkSubscriptionStatus(session.user);
 
         if (isSubscriber) {
-            subscribeBtn.innerText = "GERIR SUBSCRIÇÃO";
+            subscribeBtn.innerHTML = `GERIR SUBSCRIÇÃO<span class="subscribe-btn-email">${session.user.email}</span>`;
         } else {
-            subscribeBtn.innerText = "ENTRAR E COMEÇAR A RECEBER";
+            subscribeBtn.innerHTML = `COMEÇAR A RECEBER<span class="subscribe-btn-email">${session.user.email}</span>`;
         }
     } else {
         isSubscriber = false;
-        subscribeBtn.innerText = "ENTRAR E COMEÇAR A RECEBER";
-        userEmailDisplay.innerText = "";
-        if (signOutBtn) signOutBtn.style.display = 'none';
-        if (userStatusRow) userStatusRow.style.display = 'none';
+        subscribeBtn.innerHTML = "COMEÇAR A RECEBER";
     }
 }
 

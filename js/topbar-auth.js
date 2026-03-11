@@ -50,7 +50,7 @@
             const { error } = await client.auth.signInWithOtp({
                 email: email,
                 options: {
-                    emailRedirectTo: 'https://coreboxportugal.com/fogo-box'
+                    emailRedirectTo: `${window.location.origin}/fogo-box`
                 }
             });
 
@@ -64,14 +64,27 @@
 
     // Update topbar button based on auth state
     function updateTopbarBtn(session) {
+        // Remove existing topbar email info if present
+        const existingInfo = document.getElementById('topbar-user-info');
+        if (existingInfo) existingInfo.remove();
+
         if (session) {
-            loginBtn.innerText = 'Sair';
-            loginBtn.classList.add('logged-in');
-            loginBtn.title = session.user.email;
+            // Inject email info + logout button into topbar right side
+            const infoWrapper = document.createElement('div');
+            infoWrapper.id = 'topbar-user-info';
+            infoWrapper.className = 'topbar-user-info';
+            infoWrapper.innerHTML = `
+                <span class="topbar-user-email">Sessão iniciada como: <strong>${session.user.email}</strong></span>
+                <button class="topbar-signout-btn" id="topbar-signout-btn">Terminar sessão</button>
+            `;
+            loginBtn.style.display = 'none';
+            loginBtn.parentElement.appendChild(infoWrapper);
+
+            document.getElementById('topbar-signout-btn').addEventListener('click', async () => {
+                await client.auth.signOut();
+            });
         } else {
-            loginBtn.innerText = 'Iniciar sessão';
-            loginBtn.classList.remove('logged-in');
-            loginBtn.title = '';
+            loginBtn.style.display = '';
         }
     }
 
