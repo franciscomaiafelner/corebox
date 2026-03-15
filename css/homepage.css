@@ -66,6 +66,36 @@ body {
     border: 1px solid #e0e0e0;
 }
 
+.section-image {
+    width: 100%;
+    height: auto;
+    margin-top: 16px;
+    border-radius: 4px;
+    display: block;
+}
+
+.what-is-content {
+    display: flex;
+    gap: 24px;
+    align-items: flex-end;
+}
+
+.what-is-text {
+    flex: 1;
+}
+
+.what-is-text p {
+    margin-bottom: 0;
+}
+
+.what-is-image {
+    width: 45%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 4px;
+    display: block;
+}
+
 .box-item-text {
     flex: 1;
 }
