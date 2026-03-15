@@ -299,3 +299,17 @@ ul li {
     color: #bbb;
     font-style: italic;
 }
+
+/* Responsiveness */
+@media (max-width: 600px) {
+    .what-is-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .what-is-image {
+        width: 100%;
+        margin-top: 8px;
+    }
+}
