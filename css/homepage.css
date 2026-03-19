@@ -226,7 +226,11 @@ ul li {
 /* Footer */
 .footer {
     padding: 32px 0;
-    text-align: center;
+    text-align: left;
+}
+
+.footer-tagline {
+    color: #666;
 }
 
 /* Modal — keep functional styling */
