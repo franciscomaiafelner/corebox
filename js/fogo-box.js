@@ -55,12 +55,16 @@ subscribeBtn.addEventListener('click', async () => {
         subscribeBtn.disabled = false;
         subscribeBtn.innerHTML = `GERIR SUBSCRIÇÃO<span class="subscribe-btn-email">${currentSession?.user?.email || ''}</span>`;
     } else {
-        // Se não é assinante -> Checkout
+        // Se não é assinante -> Checkout (TEMPORÁRIO: Produto Indisponível)
+        window.location.href = "/pages/indisponivel.html";
+        
+        /* CÓDIGO ORIGINAL (Recuperar mais tarde)
         subscribeBtn.disabled = true;
         subscribeBtn.innerHTML = "A REDIRECIONAR...";
         await callEdgeFunction('checkout'); // Preço hardcoded no backend
         subscribeBtn.disabled = false;
         subscribeBtn.innerHTML = `COMEÇAR A RECEBER<span class="subscribe-btn-email">${currentSession?.user?.email || ''}</span>`;
+        */
     }
 });
 
@@ -84,7 +88,7 @@ authForm.onsubmit = async (e) => {
     const { error } = await supabaseClient.auth.signInWithOtp({
         email: email,
         options: {
-            emailRedirectTo: window.location.origin
+            emailRedirectTo: 'http://127.0.0.1:5500/pages/fogo-box.html'
         }
     });
 
